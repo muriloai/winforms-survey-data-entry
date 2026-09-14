@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{4F3D258A-6E5D-4079-8DD8-3429C9556666}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>SurveyDataEntry</RootNamespace>
+    <AssemblyName>SurveyDataEntry</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ApplicationIcon>ic_rm.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="MySql.Data, Version=6.9.3.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>lib\MySql.Data.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="conexaoBD.cs" />
+    <Compile Include="camada_dados.cs" />
+    <Compile Include="frm_cadastrar_cliente.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frm_cadastrar_cliente.Designer.cs">
+      <DependentUpon>frm_cadastrar_cliente.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frm_cadastrar_formulario.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frm_cadastrar_formulario.Designer.cs">
+      <DependentUpon>frm_cadastrar_formulario.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frm_acesso_restrito.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frm_acesso_restrito.Designer.cs">
+      <DependentUpon>frm_acesso_restrito.cs</DependentUpon>
+    </Compile>
+    <Compile Include="objeto_posto_coleta.cs" />
+    <Compile Include="frm_cadastrar_posto_coleta.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frm_cadastrar_posto_coleta.Designer.cs">
+      <DependentUpon>frm_cadastrar_posto_coleta.cs</DependentUpon>
+    </Compile>
+    <Compile Include="objeto_formularios.cs" />
+    <Compile Include="objeto_cliente.cs" />
+    <Compile Include="frm_seletor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frm_seletor.Designer.cs">
+      <DependentUpon>frm_seletor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="objeto_resposta.cs" />
+    <Compile Include="objeto_pergunta.cs" />
+    <Compile Include="objeto_pergunta_respondida.cs" />
+    <Compile Include="frm_cadastrar_perguntas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frm_cadastrar_perguntas.Designer.cs">
+      <DependentUpon>frm_cadastrar_perguntas.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frm_cadastrar_resposta.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frm_cadastrar_resposta.Designer.cs">
+      <DependentUpon>frm_cadastrar_resposta.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frm_menu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frm_menu.Designer.cs">
+      <DependentUpon>frm_menu.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frm_responder_pesquisa.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frm_responder_pesquisa.Designer.cs">
+      <DependentUpon>frm_responder_pesquisa.cs</DependentUpon>
+    </Compile>
+    <Compile Include="objeto_resposta_respondida.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="frm_cadastrar_cliente.resx">
+      <DependentUpon>frm_cadastrar_cliente.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frm_cadastrar_formulario.resx">
+      <DependentUpon>frm_cadastrar_formulario.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frm_acesso_restrito.resx">
+      <DependentUpon>frm_acesso_restrito.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frm_cadastrar_perguntas.resx">
+      <DependentUpon>frm_cadastrar_perguntas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frm_cadastrar_posto_coleta.resx">
+      <DependentUpon>frm_cadastrar_posto_coleta.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frm_cadastrar_resposta.resx">
+      <DependentUpon>frm_cadastrar_resposta.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frm_menu.resx">
+      <DependentUpon>frm_menu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frm_responder_pesquisa.resx">
+      <DependentUpon>frm_responder_pesquisa.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frm_seletor.resx">
+      <DependentUpon>frm_seletor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="resposta.resx">
+      <DependentUpon>resposta.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="tela_final.resx">
+      <DependentUpon>tela_final.cs</DependentUpon>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <None Include="app.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="resposta.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="resposta.Designer.cs">
+      <DependentUpon>resposta.cs</DependentUpon>
+    </Compile>
+    <Compile Include="tela_final.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="tela_final.Designer.cs">
+      <DependentUpon>tela_final.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\survey_hero.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\logo_survey.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ic_info.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\btn_01.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\lock_01.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\seta_01.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="ic_rm.ico" />
+    <None Include="Resources\lock_03.png" />
+    <None Include="Resources\lock_02.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
