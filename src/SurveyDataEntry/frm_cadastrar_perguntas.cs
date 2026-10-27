@@ -87,9 +87,18 @@ namespace SurveyDataEntry
             }
         }
 
+        private void btn_cancelar_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
         private void frm_cadastrar_perguntas_KeyUp(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Enter && txt_pergunta.Focused && !string.IsNullOrEmpty((txt_pergunta.Text ?? "").Trim()))
+            if (e.KeyCode == Keys.Escape)
+            {
+                this.Close();
+            }
+            else if (e.KeyCode == Keys.Enter && txt_pergunta.Focused && !string.IsNullOrEmpty((txt_pergunta.Text ?? "").Trim()))
             {
                 btn_cad_pergunta_Click(this, null);
             }

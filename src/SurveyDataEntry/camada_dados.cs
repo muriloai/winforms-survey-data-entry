@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.SQLite;
 using System.Diagnostics;
 using System.Text;
-using MySql.Data.MySqlClient;
 
 namespace SurveyDataEntry
 {
@@ -99,10 +99,39 @@ namespace SurveyDataEntry
             ESTADO_UF = "uf",
             ESTADO_ID_PAIS = "id_pais_fk";
 
-        // Auxiliares
-        private char identificar_SimNao_BoolToChar(bool nulo)
+        // Auxiliares de conversao segura para SQLite
+        private static int safeGetInt32(IDataRecord reader, string columnName)
         {
-            return nulo ? 's' : 'n';
+            int ordinal = reader.GetOrdinal(columnName);
+            if (reader.IsDBNull(ordinal)) return 0;
+            return Convert.ToInt32(reader.GetValue(ordinal));
+        }
+
+        private static string safeGetString(IDataRecord reader, string columnName)
+        {
+            int ordinal = reader.GetOrdinal(columnName);
+            if (reader.IsDBNull(ordinal)) return string.Empty;
+            return reader.GetValue(ordinal).ToString();
+        }
+
+        private static char safeGetChar(IDataRecord reader, string columnName)
+        {
+            int ordinal = reader.GetOrdinal(columnName);
+            if (reader.IsDBNull(ordinal)) return '\0';
+            object val = reader.GetValue(ordinal);
+            if (val is char c) return c;
+            if (val is string s && s.Length > 0) return s[0];
+            if (val is byte b) return (char)b;
+            if (val is short sh) return (char)sh;
+            if (val is int i) return (char)i;
+            if (val is long l) return (char)l;
+            string str = val.ToString();
+            return str.Length > 0 ? str[0] : '\0';
+        }
+
+        private string identificar_SimNao_BoolToString(bool nulo)
+        {
+            return nulo ? "s" : "n";
         }
 
         // =========================================================================
@@ -114,17 +143,17 @@ namespace SurveyDataEntry
             List<int> resultados = new List<int>();
             try
             {
-                using (MySqlCommand cmd = new MySqlCommand(
+                using (SQLiteCommand cmd = new SQLiteCommand(
                     "SELECT " + PERGUNTA_ID + " FROM " + PERGUNTA_TABELA +
                     " WHERE " + PERGUNTA_ID_FORMULARIO + " = @IdForm AND " + PERGUNTA_ATIVO + " = 's' ORDER BY " + PERGUNTA_POSICAO + " ASC",
                     ConexaoBD.getConexao()))
                 {
                     cmd.Parameters.AddWithValue("@IdForm", id_form);
-                    using (MySqlDataReader leitor = cmd.ExecuteReader())
+                    using (SQLiteDataReader leitor = cmd.ExecuteReader())
                     {
                         while (leitor.Read())
                         {
-                            resultados.Add(leitor.GetInt32(PERGUNTA_ID));
+                            resultados.Add(safeGetInt32(leitor, PERGUNTA_ID));
                         }
                     }
                 }
@@ -141,7 +170,7 @@ namespace SurveyDataEntry
             objeto_pergunta resultado = new objeto_pergunta();
             try
             {
-                using (MySqlCommand cmd = new MySqlCommand(
+                using (SQLiteCommand cmd = new SQLiteCommand(
                     "SELECT " +
                     PERGUNTA_ID + "," +
                     PERGUNTA_ID_FORMULARIO + "," +
@@ -153,16 +182,16 @@ namespace SurveyDataEntry
                     " WHERE " + PERGUNTA_ID + " = (SELECT max(" + PERGUNTA_ID + ") FROM " + PERGUNTA_TABELA + " LIMIT 1)",
                     ConexaoBD.getConexao()))
                 {
-                    using (MySqlDataReader leitor = cmd.ExecuteReader())
+                    using (SQLiteDataReader leitor = cmd.ExecuteReader())
                     {
                         while (leitor.Read())
                         {
-                            resultado.id_pergunta = leitor.GetInt32(PERGUNTA_ID);
-                            resultado.posicao = leitor.GetInt32(PERGUNTA_POSICAO);
-                            resultado.nomenclatura = leitor.GetString(PERGUNTA_NOMECLATURA);
-                            resultado.permite_nulo = leitor.GetChar(PERGUNTA_NULO);
-                            resultado.maxResp = leitor.GetInt32(PERGUNTA_RESP_MAX);
-                            resultado.id_formulario = leitor.GetInt32(PERGUNTA_ID_FORMULARIO);
+                            resultado.id_pergunta = safeGetInt32(leitor, PERGUNTA_ID);
+                            resultado.posicao = safeGetInt32(leitor, PERGUNTA_POSICAO);
+                            resultado.nomenclatura = safeGetString(leitor, PERGUNTA_NOMECLATURA);
+                            resultado.permite_nulo = safeGetChar(leitor, PERGUNTA_NULO);
+                            resultado.maxResp = safeGetInt32(leitor, PERGUNTA_RESP_MAX);
+                            resultado.id_formulario = safeGetInt32(leitor, PERGUNTA_ID_FORMULARIO);
                         }
                     }
                 }
@@ -179,7 +208,7 @@ namespace SurveyDataEntry
             objeto_pergunta resultado = new objeto_pergunta();
             try
             {
-                using (MySqlCommand cmd = new MySqlCommand(
+                using (SQLiteCommand cmd = new SQLiteCommand(
                     "SELECT " +
                     PERGUNTA_ID + "," +
                     PERGUNTA_ID_FORMULARIO + "," +
@@ -192,16 +221,16 @@ namespace SurveyDataEntry
                     ConexaoBD.getConexao()))
                 {
                     cmd.Parameters.AddWithValue("@Id_form", id_form);
-                    using (MySqlDataReader leitor = cmd.ExecuteReader())
+                    using (SQLiteDataReader leitor = cmd.ExecuteReader())
                     {
                         while (leitor.Read())
                         {
-                            resultado.id_pergunta = leitor.GetInt32(PERGUNTA_ID);
-                            resultado.posicao = leitor.GetInt32(PERGUNTA_POSICAO);
-                            resultado.nomenclatura = leitor.GetString(PERGUNTA_NOMECLATURA);
-                            resultado.permite_nulo = leitor.GetChar(PERGUNTA_NULO);
-                            resultado.maxResp = leitor.GetInt32(PERGUNTA_RESP_MAX);
-                            resultado.id_formulario = leitor.GetInt32(PERGUNTA_ID_FORMULARIO);
+                            resultado.id_pergunta = safeGetInt32(leitor, PERGUNTA_ID);
+                            resultado.posicao = safeGetInt32(leitor, PERGUNTA_POSICAO);
+                            resultado.nomenclatura = safeGetString(leitor, PERGUNTA_NOMECLATURA);
+                            resultado.permite_nulo = safeGetChar(leitor, PERGUNTA_NULO);
+                            resultado.maxResp = safeGetInt32(leitor, PERGUNTA_RESP_MAX);
+                            resultado.id_formulario = safeGetInt32(leitor, PERGUNTA_ID_FORMULARIO);
                         }
                     }
                 }
@@ -218,7 +247,7 @@ namespace SurveyDataEntry
             objeto_pergunta resultado = new objeto_pergunta();
             try
             {
-                using (MySqlCommand cmd = new MySqlCommand(
+                using (SQLiteCommand cmd = new SQLiteCommand(
                     "SELECT " +
                     PERGUNTA_ID + "," +
                     PERGUNTA_ID_FORMULARIO + "," +
@@ -231,16 +260,16 @@ namespace SurveyDataEntry
                     ConexaoBD.getConexao()))
                 {
                     cmd.Parameters.AddWithValue("@IdPerg", id_pergunta);
-                    using (MySqlDataReader leitor = cmd.ExecuteReader())
+                    using (SQLiteDataReader leitor = cmd.ExecuteReader())
                     {
                         while (leitor.Read())
                         {
-                            resultado.id_pergunta = leitor.GetInt32(PERGUNTA_ID);
-                            resultado.posicao = leitor.GetInt32(PERGUNTA_POSICAO);
-                            resultado.nomenclatura = leitor.GetString(PERGUNTA_NOMECLATURA);
-                            resultado.permite_nulo = leitor.GetChar(PERGUNTA_NULO);
-                            resultado.maxResp = leitor.GetInt32(PERGUNTA_RESP_MAX);
-                            resultado.id_formulario = leitor.GetInt32(PERGUNTA_ID_FORMULARIO);
+                            resultado.id_pergunta = safeGetInt32(leitor, PERGUNTA_ID);
+                            resultado.posicao = safeGetInt32(leitor, PERGUNTA_POSICAO);
+                            resultado.nomenclatura = safeGetString(leitor, PERGUNTA_NOMECLATURA);
+                            resultado.permite_nulo = safeGetChar(leitor, PERGUNTA_NULO);
+                            resultado.maxResp = safeGetInt32(leitor, PERGUNTA_RESP_MAX);
+                            resultado.id_formulario = safeGetInt32(leitor, PERGUNTA_ID_FORMULARIO);
                         }
                     }
                 }
@@ -257,7 +286,7 @@ namespace SurveyDataEntry
             List<objeto_pergunta> resultados = new List<objeto_pergunta>();
             try
             {
-                using (MySqlCommand cmd = new MySqlCommand(
+                using (SQLiteCommand cmd = new SQLiteCommand(
                     "SELECT " +
                     PERGUNTA_ID + "," +
                     PERGUNTA_ID_FORMULARIO + "," +
@@ -270,17 +299,17 @@ namespace SurveyDataEntry
                     ConexaoBD.getConexao()))
                 {
                     cmd.Parameters.AddWithValue("@idForm", id_form);
-                    using (MySqlDataReader leitor = cmd.ExecuteReader())
+                    using (SQLiteDataReader leitor = cmd.ExecuteReader())
                     {
                         while (leitor.Read())
                         {
                             objeto_pergunta resultado = new objeto_pergunta();
-                            resultado.id_pergunta = leitor.GetInt32(PERGUNTA_ID);
-                            resultado.posicao = leitor.GetInt32(PERGUNTA_POSICAO);
-                            resultado.nomenclatura = leitor.GetString(PERGUNTA_NOMECLATURA);
-                            resultado.permite_nulo = leitor.GetChar(PERGUNTA_NULO);
-                            resultado.maxResp = leitor.GetInt32(PERGUNTA_RESP_MAX);
-                            resultado.id_formulario = leitor.GetInt32(PERGUNTA_ID_FORMULARIO);
+                            resultado.id_pergunta = safeGetInt32(leitor, PERGUNTA_ID);
+                            resultado.posicao = safeGetInt32(leitor, PERGUNTA_POSICAO);
+                            resultado.nomenclatura = safeGetString(leitor, PERGUNTA_NOMECLATURA);
+                            resultado.permite_nulo = safeGetChar(leitor, PERGUNTA_NULO);
+                            resultado.maxResp = safeGetInt32(leitor, PERGUNTA_RESP_MAX);
+                            resultado.id_formulario = safeGetInt32(leitor, PERGUNTA_ID_FORMULARIO);
                             resultados.Add(resultado);
                         }
                     }
@@ -302,7 +331,7 @@ namespace SurveyDataEntry
             List<objeto_resposta> resultados = new List<objeto_resposta>();
             try
             {
-                using (MySqlCommand cmd = new MySqlCommand(
+                using (SQLiteCommand cmd = new SQLiteCommand(
                     "SELECT " +
                     RESPOSTA_ID + "," +
                     RESPOSTA_ID_TIPO + "," +
@@ -313,15 +342,15 @@ namespace SurveyDataEntry
                     ConexaoBD.getConexao()))
                 {
                     cmd.Parameters.AddWithValue("@IdPergunta", id_pergunta);
-                    using (MySqlDataReader leitor = cmd.ExecuteReader())
+                    using (SQLiteDataReader leitor = cmd.ExecuteReader())
                     {
                         while (leitor.Read())
                         {
                             objeto_resposta obj_resp = new objeto_resposta();
-                            obj_resp.id_resposta = leitor.GetInt32(RESPOSTA_ID);
-                            obj_resp.tipo = leitor.GetInt32(RESPOSTA_ID_TIPO);
-                            obj_resp.nomenclatura = leitor.GetString(RESPOSTA_NOMECLATURA);
-                            obj_resp.posicao = leitor.GetInt32(RESPOSTA_POSICAO);
+                            obj_resp.id_resposta = safeGetInt32(leitor, RESPOSTA_ID);
+                            obj_resp.tipo = safeGetInt32(leitor, RESPOSTA_ID_TIPO);
+                            obj_resp.nomenclatura = safeGetString(leitor, RESPOSTA_NOMECLATURA);
+                            obj_resp.posicao = safeGetInt32(leitor, RESPOSTA_POSICAO);
                             resultados.Add(obj_resp);
                         }
                     }
@@ -339,7 +368,7 @@ namespace SurveyDataEntry
             objeto_resposta obj_resp = new objeto_resposta();
             try
             {
-                using (MySqlCommand cmd = new MySqlCommand(
+                using (SQLiteCommand cmd = new SQLiteCommand(
                     "SELECT " +
                     RESPOSTA_ID + "," +
                     RESPOSTA_ID_TIPO + "," +
@@ -350,14 +379,14 @@ namespace SurveyDataEntry
                     ConexaoBD.getConexao()))
                 {
                     cmd.Parameters.AddWithValue("@IdPergunta", id_pergunta);
-                    using (MySqlDataReader leitor = cmd.ExecuteReader())
+                    using (SQLiteDataReader leitor = cmd.ExecuteReader())
                     {
                         while (leitor.Read())
                         {
-                            obj_resp.id_resposta = leitor.GetInt32(RESPOSTA_ID);
-                            obj_resp.tipo = leitor.GetInt32(RESPOSTA_ID_TIPO);
-                            obj_resp.nomenclatura = leitor.GetString(RESPOSTA_NOMECLATURA);
-                            obj_resp.posicao = leitor.GetInt32(RESPOSTA_POSICAO);
+                            obj_resp.id_resposta = safeGetInt32(leitor, RESPOSTA_ID);
+                            obj_resp.tipo = safeGetInt32(leitor, RESPOSTA_ID_TIPO);
+                            obj_resp.nomenclatura = safeGetString(leitor, RESPOSTA_NOMECLATURA);
+                            obj_resp.posicao = safeGetInt32(leitor, RESPOSTA_POSICAO);
                         }
                     }
                 }
@@ -374,7 +403,7 @@ namespace SurveyDataEntry
             objeto_resposta obj_resp = new objeto_resposta();
             try
             {
-                using (MySqlCommand cmd = new MySqlCommand(
+                using (SQLiteCommand cmd = new SQLiteCommand(
                     "SELECT " +
                     RESPOSTA_ID + "," +
                     RESPOSTA_ID_TIPO + "," +
@@ -385,14 +414,14 @@ namespace SurveyDataEntry
                     ConexaoBD.getConexao()))
                 {
                     cmd.Parameters.AddWithValue("@IdPerg", id_pergunta);
-                    using (MySqlDataReader leitor = cmd.ExecuteReader())
+                    using (SQLiteDataReader leitor = cmd.ExecuteReader())
                     {
                         while (leitor.Read())
                         {
-                            obj_resp.id_resposta = leitor.GetInt32(RESPOSTA_ID);
-                            obj_resp.tipo = leitor.GetInt32(RESPOSTA_ID_TIPO);
-                            obj_resp.nomenclatura = leitor.GetString(RESPOSTA_NOMECLATURA);
-                            obj_resp.posicao = leitor.GetInt32(RESPOSTA_POSICAO);
+                            obj_resp.id_resposta = safeGetInt32(leitor, RESPOSTA_ID);
+                            obj_resp.tipo = safeGetInt32(leitor, RESPOSTA_ID_TIPO);
+                            obj_resp.nomenclatura = safeGetString(leitor, RESPOSTA_NOMECLATURA);
+                            obj_resp.posicao = safeGetInt32(leitor, RESPOSTA_POSICAO);
                         }
                     }
                 }
@@ -413,7 +442,7 @@ namespace SurveyDataEntry
             List<string> resultados = new List<string>();
             try
             {
-                using (MySqlCommand cmd = new MySqlCommand(
+                using (SQLiteCommand cmd = new SQLiteCommand(
                     "SELECT distinct(" + COLETA_DADOS_TEXTO_TABELA + "." + COLETA_DADOS_TEXTO_TEXTO + ") as " + COLETA_DADOS_TEXTO_TEXTO + " FROM " + COLETA_DADOS_TEXTO_TABELA +
                     " INNER JOIN " + COLETA_DADOS_TABELA + " ON " + COLETA_DADOS_TABELA + "." + COLETA_DADOS_ID + " = " + COLETA_DADOS_TEXTO_TABELA + "." + COLETA_DADOS_TEXTO_COLETA_DADOS_ID_RESPOSTA +
                     " INNER JOIN " + RESPOSTA_TABELA + " ON " + RESPOSTA_TABELA + "." + RESPOSTA_ID + " = " + COLETA_DADOS_TABELA + "." + COLETA_DADOS_ID_RESPOSTA +
@@ -421,11 +450,11 @@ namespace SurveyDataEntry
                     ConexaoBD.getConexao()))
                 {
                     cmd.Parameters.AddWithValue("@IdResp", id_resposta);
-                    using (MySqlDataReader leitor = cmd.ExecuteReader())
+                    using (SQLiteDataReader leitor = cmd.ExecuteReader())
                     {
                         while (leitor.Read())
                         {
-                            resultados.Add(leitor.GetString(COLETA_DADOS_TEXTO_TEXTO));
+                            resultados.Add(safeGetString(leitor, COLETA_DADOS_TEXTO_TEXTO));
                         }
                     }
                 }
@@ -446,15 +475,15 @@ namespace SurveyDataEntry
             List<string> resultados = new List<string>();
             try
             {
-                using (MySqlCommand cmd = new MySqlCommand(
+                using (SQLiteCommand cmd = new SQLiteCommand(
                     "SELECT distinct(" + CIDADE_NOME + ") FROM " + CIDADE_TABELA + " ORDER BY " + CIDADE_NOME + " ASC",
                     ConexaoBD.getConexao()))
                 {
-                    using (MySqlDataReader leitor = cmd.ExecuteReader())
+                    using (SQLiteDataReader leitor = cmd.ExecuteReader())
                     {
                         while (leitor.Read())
                         {
-                            resultados.Add(leitor.GetString(CIDADE_NOME));
+                            resultados.Add(safeGetString(leitor, CIDADE_NOME));
                         }
                     }
                 }
@@ -471,15 +500,15 @@ namespace SurveyDataEntry
             List<string> resultados = new List<string>();
             try
             {
-                using (MySqlCommand cmd = new MySqlCommand(
+                using (SQLiteCommand cmd = new SQLiteCommand(
                     "SELECT distinct(" + ESTADO_UF + ") FROM " + ESTADO_TABELA + " ORDER BY " + ESTADO_UF + " ASC",
                     ConexaoBD.getConexao()))
                 {
-                    using (MySqlDataReader leitor = cmd.ExecuteReader())
+                    using (SQLiteDataReader leitor = cmd.ExecuteReader())
                     {
                         while (leitor.Read())
                         {
-                            resultados.Add(leitor.GetString(ESTADO_UF));
+                            resultados.Add(safeGetString(leitor, ESTADO_UF));
                         }
                     }
                 }
@@ -500,17 +529,17 @@ namespace SurveyDataEntry
             List<objeto_cliente> resultados = new List<objeto_cliente>();
             try
             {
-                using (MySqlCommand cmd = new MySqlCommand(
+                using (SQLiteCommand cmd = new SQLiteCommand(
                     "SELECT " + CLIENTE_ID + "," + CLIENTE_NOME + " FROM " + CLIENTE_TABELA + " ORDER BY " + CLIENTE_NOME + " ASC",
                     ConexaoBD.getConexao()))
                 {
-                    using (MySqlDataReader leitor = cmd.ExecuteReader())
+                    using (SQLiteDataReader leitor = cmd.ExecuteReader())
                     {
                         while (leitor.Read())
                         {
                             objeto_cliente cliente = new objeto_cliente();
-                            cliente.id_cliente = leitor.GetInt32(CLIENTE_ID);
-                            cliente.nome = leitor.GetString(CLIENTE_NOME);
+                            cliente.id_cliente = safeGetInt32(leitor, CLIENTE_ID);
+                            cliente.nome = safeGetString(leitor, CLIENTE_NOME);
                             resultados.Add(cliente);
                         }
                     }
@@ -528,17 +557,17 @@ namespace SurveyDataEntry
             objeto_cliente cliente = new objeto_cliente();
             try
             {
-                using (MySqlCommand cmd = new MySqlCommand(
+                using (SQLiteCommand cmd = new SQLiteCommand(
                     "SELECT " + CLIENTE_ID + "," + CLIENTE_NOME + " FROM " + CLIENTE_TABELA + " WHERE " + CLIENTE_ID + " = @Id LIMIT 1",
                     ConexaoBD.getConexao()))
                 {
                     cmd.Parameters.AddWithValue("@Id", id);
-                    using (MySqlDataReader leitor = cmd.ExecuteReader())
+                    using (SQLiteDataReader leitor = cmd.ExecuteReader())
                     {
                         while (leitor.Read())
                         {
-                            cliente.id_cliente = leitor.GetInt32(CLIENTE_ID);
-                            cliente.nome = leitor.GetString(CLIENTE_NOME);
+                            cliente.id_cliente = safeGetInt32(leitor, CLIENTE_ID);
+                            cliente.nome = safeGetString(leitor, CLIENTE_NOME);
                         }
                     }
                 }
@@ -559,7 +588,7 @@ namespace SurveyDataEntry
             List<objeto_formulario> resultados = new List<objeto_formulario>();
             try
             {
-                using (MySqlCommand cmd = new MySqlCommand(
+                using (SQLiteCommand cmd = new SQLiteCommand(
                     "SELECT " +
                     FORMULARIO_ID + "," +
                     FORMULARIO_ID_CLIENTE + "," +
@@ -571,18 +600,18 @@ namespace SurveyDataEntry
                     " FROM " + FORMULARIO_TABELA + " ORDER BY " + FORMULARIO_DT_CRIACAO + " DESC",
                     ConexaoBD.getConexao()))
                 {
-                    using (MySqlDataReader leitor = cmd.ExecuteReader())
+                    using (SQLiteDataReader leitor = cmd.ExecuteReader())
                     {
                         while (leitor.Read())
                         {
                             objeto_formulario form = new objeto_formulario();
-                            form.id_formulario = leitor.GetInt32(FORMULARIO_ID);
-                            form.id_cliente = leitor.GetInt32(FORMULARIO_ID_CLIENTE);
-                            form.titulo = leitor.GetString(FORMULARIO_TITULO);
-                            form.data_criacao = leitor.IsDBNull(leitor.GetOrdinal(FORMULARIO_DT_CRIACAO)) ? "" : leitor.GetString(FORMULARIO_DT_CRIACAO);
-                            form.data_entrega = leitor.IsDBNull(leitor.GetOrdinal(FORMULARIO_DT_ENTREGA)) ? "" : leitor.GetString(FORMULARIO_DT_ENTREGA);
-                            form.situacao = leitor.GetChar(FORMULARIO_SITUACAO);
-                            form.ativo = leitor.GetChar(FORMULARIO_ATIVO);
+                            form.id_formulario = safeGetInt32(leitor, FORMULARIO_ID);
+                            form.id_cliente = safeGetInt32(leitor, FORMULARIO_ID_CLIENTE);
+                            form.titulo = safeGetString(leitor, FORMULARIO_TITULO);
+                            form.data_criacao = safeGetString(leitor, FORMULARIO_DT_CRIACAO);
+                            form.data_entrega = safeGetString(leitor, FORMULARIO_DT_ENTREGA);
+                            form.situacao = safeGetChar(leitor, FORMULARIO_SITUACAO);
+                            form.ativo = safeGetChar(leitor, FORMULARIO_ATIVO);
                             resultados.Add(form);
                         }
                     }
@@ -600,7 +629,7 @@ namespace SurveyDataEntry
             List<objeto_formulario> resultados = new List<objeto_formulario>();
             try
             {
-                using (MySqlCommand cmd = new MySqlCommand(
+                using (SQLiteCommand cmd = new SQLiteCommand(
                     "SELECT " +
                     FORMULARIO_ID + "," +
                     FORMULARIO_ID_CLIENTE + "," +
@@ -612,18 +641,18 @@ namespace SurveyDataEntry
                     " FROM " + FORMULARIO_TABELA + " WHERE " + FORMULARIO_SITUACAO + " = 'a' ORDER BY " + FORMULARIO_DT_CRIACAO + " DESC",
                     ConexaoBD.getConexao()))
                 {
-                    using (MySqlDataReader leitor = cmd.ExecuteReader())
+                    using (SQLiteDataReader leitor = cmd.ExecuteReader())
                     {
                         while (leitor.Read())
                         {
                             objeto_formulario form = new objeto_formulario();
-                            form.id_formulario = leitor.GetInt32(FORMULARIO_ID);
-                            form.id_cliente = leitor.GetInt32(FORMULARIO_ID_CLIENTE);
-                            form.titulo = leitor.GetString(FORMULARIO_TITULO);
-                            form.data_criacao = leitor.IsDBNull(leitor.GetOrdinal(FORMULARIO_DT_CRIACAO)) ? "" : leitor.GetString(FORMULARIO_DT_CRIACAO);
-                            form.data_entrega = leitor.IsDBNull(leitor.GetOrdinal(FORMULARIO_DT_ENTREGA)) ? "" : leitor.GetString(FORMULARIO_DT_ENTREGA);
-                            form.situacao = leitor.GetChar(FORMULARIO_SITUACAO);
-                            form.ativo = leitor.GetChar(FORMULARIO_ATIVO);
+                            form.id_formulario = safeGetInt32(leitor, FORMULARIO_ID);
+                            form.id_cliente = safeGetInt32(leitor, FORMULARIO_ID_CLIENTE);
+                            form.titulo = safeGetString(leitor, FORMULARIO_TITULO);
+                            form.data_criacao = safeGetString(leitor, FORMULARIO_DT_CRIACAO);
+                            form.data_entrega = safeGetString(leitor, FORMULARIO_DT_ENTREGA);
+                            form.situacao = safeGetChar(leitor, FORMULARIO_SITUACAO);
+                            form.ativo = safeGetChar(leitor, FORMULARIO_ATIVO);
                             resultados.Add(form);
                         }
                     }
@@ -641,7 +670,7 @@ namespace SurveyDataEntry
             objeto_formulario resultado = new objeto_formulario();
             try
             {
-                using (MySqlCommand cmd = new MySqlCommand(
+                using (SQLiteCommand cmd = new SQLiteCommand(
                     "SELECT " +
                     FORMULARIO_ID + "," +
                     FORMULARIO_ID_CLIENTE + "," +
@@ -654,17 +683,17 @@ namespace SurveyDataEntry
                     ConexaoBD.getConexao()))
                 {
                     cmd.Parameters.AddWithValue("@Id", id);
-                    using (MySqlDataReader leitor = cmd.ExecuteReader())
+                    using (SQLiteDataReader leitor = cmd.ExecuteReader())
                     {
                         while (leitor.Read())
                         {
-                            resultado.id_formulario = leitor.GetInt32(FORMULARIO_ID);
-                            resultado.id_cliente = leitor.GetInt32(FORMULARIO_ID_CLIENTE);
-                            resultado.titulo = leitor.GetString(FORMULARIO_TITULO);
-                            resultado.data_criacao = leitor.IsDBNull(leitor.GetOrdinal(FORMULARIO_DT_CRIACAO)) ? "" : leitor.GetString(FORMULARIO_DT_CRIACAO);
-                            resultado.data_entrega = leitor.IsDBNull(leitor.GetOrdinal(FORMULARIO_DT_ENTREGA)) ? "" : leitor.GetString(FORMULARIO_DT_ENTREGA);
-                            resultado.situacao = leitor.GetChar(FORMULARIO_SITUACAO);
-                            resultado.ativo = leitor.GetChar(FORMULARIO_ATIVO);
+                            resultado.id_formulario = safeGetInt32(leitor, FORMULARIO_ID);
+                            resultado.id_cliente = safeGetInt32(leitor, FORMULARIO_ID_CLIENTE);
+                            resultado.titulo = safeGetString(leitor, FORMULARIO_TITULO);
+                            resultado.data_criacao = safeGetString(leitor, FORMULARIO_DT_CRIACAO);
+                            resultado.data_entrega = safeGetString(leitor, FORMULARIO_DT_ENTREGA);
+                            resultado.situacao = safeGetChar(leitor, FORMULARIO_SITUACAO);
+                            resultado.ativo = safeGetChar(leitor, FORMULARIO_ATIVO);
                         }
                     }
                 }
@@ -685,7 +714,7 @@ namespace SurveyDataEntry
             int resultados = 0;
             try
             {
-                using (MySqlCommand cmd = new MySqlCommand(
+                using (SQLiteCommand cmd = new SQLiteCommand(
                     "SELECT count(" + COLETA_QUESTIONARIO_ID + ") FROM " + COLETA_QUESTIONARIO_TABELA +
                     " WHERE " + COLETA_QUESTIONARIO_ID_FORMULARIO + " = @Id_form",
                     ConexaoBD.getConexao()))
@@ -714,19 +743,19 @@ namespace SurveyDataEntry
             List<objeto_posto_coleta> resultados = new List<objeto_posto_coleta>();
             try
             {
-                using (MySqlCommand cmd = new MySqlCommand(
+                using (SQLiteCommand cmd = new SQLiteCommand(
                     "SELECT " + COLETA_POSTO_ID + "," + COLETA_POSTO_NOME + "," + COLETA_POSTO_DATA_CRIACAO +
                     " FROM " + COLETA_POSTO_TABELA + " ORDER BY " + COLETA_POSTO_DATA_CRIACAO + " DESC",
                     ConexaoBD.getConexao()))
                 {
-                    using (MySqlDataReader leitor = cmd.ExecuteReader())
+                    using (SQLiteDataReader leitor = cmd.ExecuteReader())
                     {
                         while (leitor.Read())
                         {
                             objeto_posto_coleta posto = new objeto_posto_coleta();
-                            posto.id_posto = leitor.GetInt32(COLETA_POSTO_ID);
-                            posto.nome = leitor.GetString(COLETA_POSTO_NOME);
-                            posto.data_criacao = leitor.IsDBNull(leitor.GetOrdinal(COLETA_POSTO_DATA_CRIACAO)) ? "" : leitor.GetString(COLETA_POSTO_DATA_CRIACAO);
+                            posto.id_posto = safeGetInt32(leitor, COLETA_POSTO_ID);
+                            posto.nome = safeGetString(leitor, COLETA_POSTO_NOME);
+                            posto.data_criacao = safeGetString(leitor, COLETA_POSTO_DATA_CRIACAO);
                             resultados.Add(posto);
                         }
                     }
@@ -744,19 +773,19 @@ namespace SurveyDataEntry
             objeto_posto_coleta resultado = new objeto_posto_coleta();
             try
             {
-                using (MySqlCommand cmd = new MySqlCommand(
+                using (SQLiteCommand cmd = new SQLiteCommand(
                     "SELECT " + COLETA_POSTO_ID + "," + COLETA_POSTO_NOME + "," + COLETA_POSTO_DATA_CRIACAO +
                     " FROM " + COLETA_POSTO_TABELA + " WHERE " + COLETA_POSTO_ID + " = @Id LIMIT 1",
                     ConexaoBD.getConexao()))
                 {
                     cmd.Parameters.AddWithValue("@Id", id);
-                    using (MySqlDataReader leitor = cmd.ExecuteReader())
+                    using (SQLiteDataReader leitor = cmd.ExecuteReader())
                     {
                         while (leitor.Read())
                         {
-                            resultado.id_posto = leitor.GetInt32(COLETA_POSTO_ID);
-                            resultado.nome = leitor.GetString(COLETA_POSTO_NOME);
-                            resultado.data_criacao = leitor.IsDBNull(leitor.GetOrdinal(COLETA_POSTO_DATA_CRIACAO)) ? "" : leitor.GetString(COLETA_POSTO_DATA_CRIACAO);
+                            resultado.id_posto = safeGetInt32(leitor, COLETA_POSTO_ID);
+                            resultado.nome = safeGetString(leitor, COLETA_POSTO_NOME);
+                            resultado.data_criacao = safeGetString(leitor, COLETA_POSTO_DATA_CRIACAO);
                         }
                     }
                 }
@@ -772,7 +801,7 @@ namespace SurveyDataEntry
         // INSERTS
         // =========================================================================
 
-        public int inserir_umQuestionarioEReceberIDdele(int id_posto_coleta, int id_form, MySqlTransaction transacaoRecebida)
+        public int inserir_umQuestionarioEReceberIDdele(int id_posto_coleta, int id_form, SQLiteTransaction transacaoRecebida)
         {
             if (id_posto_coleta <= 0 || id_form <= 0)
             {
@@ -781,8 +810,8 @@ namespace SurveyDataEntry
 
             try
             {
-                MySqlConnection conn = transacaoRecebida != null ? transacaoRecebida.Connection : ConexaoBD.getConexao();
-                using (MySqlCommand cmd = new MySqlCommand(
+                SQLiteConnection conn = transacaoRecebida != null ? transacaoRecebida.Connection : ConexaoBD.getConexao();
+                using (SQLiteCommand cmd = new SQLiteCommand(
                     "INSERT INTO " + COLETA_QUESTIONARIO_TABELA + " (" +
                     COLETA_QUESTIONARIO_ID_POSTO_COLETA + "," + COLETA_QUESTIONARIO_ID_FORMULARIO + ") VALUES (@Id_posto, @Id_form)",
                     conn, transacaoRecebida))
@@ -791,7 +820,7 @@ namespace SurveyDataEntry
                     cmd.Parameters.AddWithValue("@Id_form", id_form);
                     cmd.ExecuteNonQuery();
 
-                    cmd.CommandText = "SELECT LAST_INSERT_ID()";
+                    cmd.CommandText = "SELECT last_insert_rowid();";
                     cmd.Parameters.Clear();
                     object scalar = cmd.ExecuteScalar();
                     if (scalar != null && scalar != DBNull.Value)
@@ -811,7 +840,7 @@ namespace SurveyDataEntry
         {
             try
             {
-                using (MySqlCommand cmd = new MySqlCommand(
+                using (SQLiteCommand cmd = new SQLiteCommand(
                     "INSERT INTO " + PERGUNTA_TABELA + " (" +
                     PERGUNTA_ID_FORMULARIO + "," +
                     PERGUNTA_ATIVO + "," +
@@ -823,10 +852,10 @@ namespace SurveyDataEntry
                     ConexaoBD.getConexao()))
                 {
                     cmd.Parameters.AddWithValue("@Id_Form", id_form);
-                    cmd.Parameters.AddWithValue("@Ativo", identificar_SimNao_BoolToChar(estado_ativo));
+                    cmd.Parameters.AddWithValue("@Ativo", identificar_SimNao_BoolToString(estado_ativo));
                     cmd.Parameters.AddWithValue("@Nomenclatura", nomenclatura);
                     cmd.Parameters.AddWithValue("@Posicao", posicao);
-                    cmd.Parameters.AddWithValue("@Nulo", identificar_SimNao_BoolToChar(aceita_nulo));
+                    cmd.Parameters.AddWithValue("@Nulo", identificar_SimNao_BoolToString(aceita_nulo));
                     cmd.Parameters.AddWithValue("@MaxResp", maxRespostas);
 
                     return cmd.ExecuteNonQuery() >= 1;
@@ -843,7 +872,7 @@ namespace SurveyDataEntry
         {
             try
             {
-                using (MySqlCommand cmd = new MySqlCommand(
+                using (SQLiteCommand cmd = new SQLiteCommand(
                     "INSERT INTO " + RESPOSTA_TABELA + " (" +
                     RESPOSTA_ID_PERGUNTA + "," +
                     RESPOSTA_ATIVO + "," +
@@ -854,7 +883,7 @@ namespace SurveyDataEntry
                     ConexaoBD.getConexao()))
                 {
                     cmd.Parameters.AddWithValue("@Id_Perg", id_pergunta);
-                    cmd.Parameters.AddWithValue("@Ativo", identificar_SimNao_BoolToChar(estado_ativo));
+                    cmd.Parameters.AddWithValue("@Ativo", identificar_SimNao_BoolToString(estado_ativo));
                     cmd.Parameters.AddWithValue("@Nomenclatura", nomenclatura);
                     cmd.Parameters.AddWithValue("@Posicao", posicao);
                     cmd.Parameters.AddWithValue("@Tipo", tipo_resposta);
@@ -869,12 +898,12 @@ namespace SurveyDataEntry
             }
         }
 
-        public bool inserir_umaRespostaCompleta_texto(int id_pergunta, int id_resposta, string texto, int id_questionario, MySqlTransaction transacaoRecebida)
+        public bool inserir_umaRespostaCompleta_texto(int id_pergunta, int id_resposta, string texto, int id_questionario, SQLiteTransaction transacaoRecebida)
         {
             try
             {
-                MySqlConnection conn = transacaoRecebida != null ? transacaoRecebida.Connection : ConexaoBD.getConexao();
-                using (MySqlCommand cmd = new MySqlCommand(
+                SQLiteConnection conn = transacaoRecebida != null ? transacaoRecebida.Connection : ConexaoBD.getConexao();
+                using (SQLiteCommand cmd = new SQLiteCommand(
                     "INSERT INTO " + COLETA_DADOS_TABELA + " (" +
                     COLETA_DADOS_ID_RESPOSTA + "," +
                     COLETA_DADOS_ID_QUESTIONARIO + "," +
@@ -888,7 +917,7 @@ namespace SurveyDataEntry
 
                     if (cmd.ExecuteNonQuery() == 1)
                     {
-                        cmd.CommandText = "SELECT LAST_INSERT_ID()";
+                        cmd.CommandText = "SELECT last_insert_rowid();";
                         cmd.Parameters.Clear();
                         object scalar = cmd.ExecuteScalar();
                         int id_resposta_coletada = scalar != null && scalar != DBNull.Value ? Convert.ToInt32(scalar) : 0;
@@ -914,12 +943,12 @@ namespace SurveyDataEntry
             return false;
         }
 
-        public bool inserir_umaRespostaCompleta(int id_pergunta, int id_resposta, int id_questionario, MySqlTransaction transacaoRecebida)
+        public bool inserir_umaRespostaCompleta(int id_pergunta, int id_resposta, int id_questionario, SQLiteTransaction transacaoRecebida)
         {
             try
             {
-                MySqlConnection conn = transacaoRecebida != null ? transacaoRecebida.Connection : ConexaoBD.getConexao();
-                using (MySqlCommand cmd = new MySqlCommand(
+                SQLiteConnection conn = transacaoRecebida != null ? transacaoRecebida.Connection : ConexaoBD.getConexao();
+                using (SQLiteCommand cmd = new SQLiteCommand(
                     "INSERT INTO " + COLETA_DADOS_TABELA + " (" +
                     COLETA_DADOS_ID_RESPOSTA + "," +
                     COLETA_DADOS_ID_PERGUNTA + "," +
@@ -945,10 +974,10 @@ namespace SurveyDataEntry
         {
             try
             {
-                using (MySqlCommand cmd = new MySqlCommand(
+                using (SQLiteCommand cmd = new SQLiteCommand(
                     "INSERT INTO " + COLETA_POSTO_TABELA + " (" +
                     COLETA_POSTO_NOME + "," +
-                    COLETA_POSTO_DATA_CRIACAO + ") VALUES (@Nome, CURDATE())",
+                    COLETA_POSTO_DATA_CRIACAO + ") VALUES (@Nome, DATE('now'))",
                     ConexaoBD.getConexao()))
                 {
                     cmd.Parameters.AddWithValue("@Nome", (nome ?? "").Trim());
@@ -966,7 +995,7 @@ namespace SurveyDataEntry
         {
             try
             {
-                using (MySqlCommand cmd = new MySqlCommand(
+                using (SQLiteCommand cmd = new SQLiteCommand(
                     "INSERT INTO " + FORMULARIO_TABELA + " (" +
                     FORMULARIO_TITULO + "," +
                     FORMULARIO_SITUACAO + "," +
@@ -974,7 +1003,7 @@ namespace SurveyDataEntry
                     FORMULARIO_ATIVO + "," +
                     FORMULARIO_ID_CLIENTE + "," +
                     FORMULARIO_DT_ENTREGA + ")" +
-                    " VALUES (@Nome, 'a', CURDATE(), 's', @IdCliente, @DTEntrega)",
+                    " VALUES (@Nome, 'a', DATE('now'), 's', @IdCliente, @DTEntrega)",
                     ConexaoBD.getConexao()))
                 {
                     cmd.Parameters.AddWithValue("@Nome", (nome ?? "").Trim());
@@ -995,10 +1024,10 @@ namespace SurveyDataEntry
         {
             try
             {
-                using (MySqlCommand cmd = new MySqlCommand(
+                using (SQLiteCommand cmd = new SQLiteCommand(
                     "INSERT INTO " + CLIENTE_TABELA + " (" +
                     CLIENTE_NOME + ", " +
-                    CLIENTE_DATA_CRIACAO + ") VALUES (@Nome, CURDATE())",
+                    CLIENTE_DATA_CRIACAO + ") VALUES (@Nome, DATE('now'))",
                     ConexaoBD.getConexao()))
                 {
                     cmd.Parameters.AddWithValue("@Nome", (nome ?? "").Trim());

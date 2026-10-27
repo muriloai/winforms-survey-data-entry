@@ -1,23 +1,20 @@
 -- =============================================================================
--- Carga Inicial de Dados do Sistema (Seed)
+-- Carga Inicial de Dados do Sistema (SQLite)
 -- Apenas dados estruturais do sistema (sem dados comerciais ou marcas)
 -- =============================================================================
-
-USE `survey_db`;
 
 -- -----------------------------------------------------------------------------
 -- Tipos de resposta suportados pela aplicação
 -- -----------------------------------------------------------------------------
-INSERT INTO `tipo_resposta` (`id_tipo_resposta`, `nomenclatura`, `estado_ativo`) VALUES
+INSERT OR IGNORE INTO tipo_resposta (id_tipo_resposta, nomenclatura, estado_ativo) VALUES
 (1, 'Único Sem Texto', 's'),
 (2, 'Único Com Texto', 's'),
-(3, 'Multiescolha Quantitativa', 's')
-ON DUPLICATE KEY UPDATE `nomenclatura` = VALUES(`nomenclatura`), `estado_ativo` = VALUES(`estado_ativo`);
+(3, 'Multiescolha Quantitativa', 's');
 
 -- -----------------------------------------------------------------------------
 -- Unidades Federativas do Brasil (suporte para respostas geográficas)
 -- -----------------------------------------------------------------------------
-INSERT INTO `estado` (`id_estado`, `nome`, `uf`, `id_pais_fk`) VALUES
+INSERT OR IGNORE INTO estado (id_estado, nome, uf, id_pais_fk) VALUES
 (1, 'Acre', 'AC', 1),
 (2, 'Alagoas', 'AL', 1),
 (3, 'Amapá', 'AP', 1),
@@ -44,5 +41,4 @@ INSERT INTO `estado` (`id_estado`, `nome`, `uf`, `id_pais_fk`) VALUES
 (24, 'Santa Catarina', 'SC', 1),
 (25, 'São Paulo', 'SP', 1),
 (26, 'Sergipe', 'SE', 1),
-(27, 'Tocantins', 'TO', 1)
-ON DUPLICATE KEY UPDATE `nome` = VALUES(`nome`), `uf` = VALUES(`uf`);
+(27, 'Tocantins', 'TO', 1);
