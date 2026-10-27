@@ -11,6 +11,7 @@ namespace SurveyDataEntry
 {
     public class ConexaoBD
     {
+        public static bool Silencioso { get; set; } = false;
         private static string conexaoString;
         private static MySqlConnection conexao;
 
@@ -47,6 +48,11 @@ namespace SurveyDataEntry
                     conexaoString = "Server=localhost;Database=survey_db;Uid=root;Pwd=;Charset=utf8;";
                 }
 
+                if (Silencioso && !conexaoString.Contains("Connection Timeout"))
+                {
+                    conexaoString += "Connection Timeout=1;";
+                }
+
                 if (conexao == null || conexao.ConnectionString != conexaoString)
                 {
                     conexao = new MySqlConnection(conexaoString);
@@ -79,13 +85,16 @@ namespace SurveyDataEntry
             catch (Exception erro)
             {
                 System.Diagnostics.Trace.WriteLine("Erro ao abrir conexão com o banco de dados: " + erro.Message);
-                MessageBox.Show(
-                    "Não foi possível conectar ao banco de dados MySQL.\n\n" +
-                    "Detalhes: " + erro.Message + "\n\n" +
-                    "Verifique se o serviço MySQL está ativo e se os dados de acesso no menu de configuração estão corretos.",
-                    "Falha na Conexão",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Warning);
+                if (!Silencioso)
+                {
+                    MessageBox.Show(
+                        "Não foi possível conectar ao banco de dados MySQL.\n\n" +
+                        "Detalhes: " + erro.Message + "\n\n" +
+                        "Verifique se o serviço MySQL está ativo e se os dados de acesso no menu de configuração estão corretos.",
+                        "Falha na Conexão",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Warning);
+                }
                 return false;
             }
         }

@@ -34,7 +34,7 @@ namespace SurveyDataEntry
         public int get_qtdIDS_pergunta()
         {
             //metodo montado para saber se tem algum id de perguntas carregado!
-            return this.IDs_perguntas.Count;
+            return this.IDs_perguntas != null ? this.IDs_perguntas.Count : 0;
         }
         public frm_responder_pesquisa(int ID_formulario, int id_posto_coleta)
         {

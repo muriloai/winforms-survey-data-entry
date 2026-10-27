@@ -36,8 +36,21 @@ O objetivo foi trazer esse sistema para a raiz do repositório de forma limpa e 
    - Título da janela principal padronizado para `"Survey Data Entry - Tabulador de Pesquisas"`.
    - Credenciais de acesso administrativo padronizadas para `admin` / `admin`.
 
+### Fase 5 -- Refinamento Visual de Layout e Documentação Fotográfica
+1. **Modernização Tipográfica e Cromática**: Adoção de Segoe UI, paleta corporativa neutra (Slate / Blue) e botões planos com feedback visual.
+2. **Reestruturação dos Formulários**:
+   - `frm_menu`: Top bar corporativa com indicadores de status, cartões de ação e painel deslizante de gestão.
+   - `frm_acesso_restrito`: Caixa de diálogo modal compacta com foco automático e atalhos de confirmação/cancelamento.
+   - `frm_seletor`: Diálogo seletor redimensionado para proporções amigáveis.
+   - `frm_cadastrar_*`: Telas de cadastro (Cliente, Posto, Formulário, Pergunta, Resposta) com cabeçalhos padronizados e eliminação de larguras excessivas.
+   - `frm_responder_pesquisa` & `resposta`: Substituição de gradientes antigos por cartões de resposta claros com destaque em azul quando assinalados.
+   - `tela_final`: Tela de confirmação com cartão centralizado e opções claras de navegação.
+3. **Automação de Captura de Telas (`scripts/capture_screenshots.ps1`)**: Script para renderização e exportação off-screen dos formulários para PNG em alta definição na pasta `docs/screenshots/`.
+4. **Atualização do `README.md`**: Inclusão da seção visual completa com todas as capturas de tela e tabelas descritivas, mantendo a regra de ausência de emojis e de marcas.
+
 ---
 
 ## 3. Status de Validação
 
 - Compilação limpa no MSBuild para configurações `Debug` e `Release` com 0 erros e 0 avisos.
+- Geração completa e automatizada dos 10 prints demonstrativos em `docs/screenshots/`.

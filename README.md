@@ -1,14 +1,14 @@
 # Survey Data Entry
 
-Sistema desktop de 2018 feito em Windows Forms (C# / .NET Framework) integrado ao banco de dados MySQL para coleta, controle e tabulação de pesquisas quantitativas e qualitativas de campo.
+Sistema desktop desenvolvido em Windows Forms (C# / .NET Framework) integrado ao banco de dados MySQL para modelagem, coleta de campo, controle operacional e tabulação analítica de pesquisas qualitativas e quantitativas.
 
 ---
 
 ## 1. Visão Geral
 
-O Survey Data Entry foi desenvolvido para gerenciar o ciclo operacional de pesquisas presenciais: desde o cadastramento de formulários e questionários estruturados até a aplicação das entrevistas em postos de coleta e a consolidação dos resultados tabulados.
+O Survey Data Entry gerencia o ciclo completo de operações de pesquisas presenciais: desde o cadastramento de formulários e questionários estruturados até a aplicação das entrevistas em postos de coleta e a consolidação dos resultados tabulados.
 
-A arquitetura desacopla a camada de persistência através de rotinas otimizadas com comandos SQL parametrizados e controle transacional, garantindo integridade dos dados durante a aplicação simultânea de questionários.
+A arquitetura desacopla a camada de persistência através de rotinas otimizadas com comandos SQL parametrizados e controle transacional, garantindo integridade e atomicidade dos dados durante a aplicação simultânea de questionários.
 
 ---
 
@@ -20,9 +20,9 @@ A arquitetura desacopla a camada de persistência através de rotinas otimizadas
 - **Tipos de Resposta Suportados**:
   - Escolha única sem campo aberto.
   - Escolha única com campo dissertativo (texto complementar livre).
-  - Múltipla escolha quantitativa / escala de avaliação.
+  - Múltipla escolha quantitativa / escala de avaliação (graus de intensidade).
 - **Controle de Postos de Coleta**: Mapeamento de unidades e locais físicos de coleta de dados.
-- **Módulo de Aplicação de Pesquisas**: Interface de preenchimento ágil para operadores com suporte a navegação por teclado, atalhos rápidos e autocompletar.
+- **Módulo de Aplicação de Pesquisas**: Interface de preenchimento ágil para operadores com suporte a navegação rápida por teclado e autocompletar.
 - **Controle Transacional de Gravação**: Gravação atômica do questionário e de suas respostas filhas via transações MySQL (commit/rollback automático).
 - **Consolidação e Tabulação de Resultados**: Views SQL para apuração estatística e contagem de respostas agrupadas por tipo.
 - **Área Restrita Administrativa**: Acesso protegido por autenticação para gestão estrutural do sistema.
@@ -30,7 +30,56 @@ A arquitetura desacopla a camada de persistência através de rotinas otimizadas
 
 ---
 
-## 3. Pré-requisitos
+## 3. Interface do Sistema
+
+A interface gráfica do sistema adota tipografia corporativa padronizada (Segoe UI), layout baseado em cartões modulares, contraste visual aprimorado e botões planos de alta usabilidade, eliminando elementos legados desproporcionais e garantindo velocidade de digitação para operadores de campo.
+
+### 3.1 Painel Principal (Dashboard)
+
+A tela principal centraliza os indicadores operacionais do sistema, atalhos de inicialização de pesquisas e o acesso ao painel de gestão.
+
+![Painel Principal - Modo Operador](docs/screenshots/01_menu_principal.png)
+*Figura 1: Dashboard principal do operador com cartões de status e acionamento de pesquisas.*
+
+![Painel de Gestao Administrativa](docs/screenshots/02_menu_gestao.png)
+*Figura 2: Dashboard com módulo administrativo desbloqueado para gerenciamento estrutural.*
+
+### 3.2 Modais de Autenticação e Seleção
+
+O controle de acesso administrativo e as rotinas de seleção utilizam caixas de diálogo modais compactas, com cabeçalho contrastante e foco automático nos campos de entrada.
+
+| Autenticação Administrativa | Seleção de Registros |
+|:---:|:---:|
+| ![Autenticacao](docs/screenshots/03_autenticacao.png) | ![Seletor](docs/screenshots/04_seletor.png) |
+| *Figura 3: Modal de autenticação para desbloqueio da área restrita.* | *Figura 4: Seletor universal de clientes, formulários e perguntas.* |
+
+### 3.3 Formulários de Cadastro e Gestão Estrutural
+
+As telas de cadastramento foram redimensionadas para proporções ergonômicas, facilitando o preenchimento sem dispersão visual:
+
+| Cadastro de Clientes | Cadastro de Postos de Coleta |
+|:---:|:---:|
+| ![Cadastro de Cliente](docs/screenshots/05_cadastro_cliente.png) | ![Cadastro de Posto de Coleta](docs/screenshots/06_cadastro_posto_coleta.png) |
+| *Figura 5: Registro de clientes demandantes de pesquisas.* | *Figura 6: Mapeamento de unidades e postos de coleta.* |
+
+| Cadastro de Formulários | Configuração de Perguntas |
+|:---:|:---:|
+| ![Cadastro de Formulario](docs/screenshots/07_cadastro_formulario.png) | ![Cadastro de Pergunta](docs/screenshots/08_cadastro_pergunta.png) |
+| *Figura 7: Definição de questionários e datas limites.* | *Figura 8: Parametrização de perguntas, ordem e regras.* |
+
+### 3.4 Aplicação e Finalização de Questionários
+
+O fluxo de coleta de dados foi projetado para máxima velocidade de entrada via teclado, com cartões de alternativas destacados, suporte a justificativas em texto aberto e escala de avaliação quantitativa:
+
+![Interface de Resposta de Questionarios](docs/screenshots/09_responder_pesquisa.png)
+*Figura 9: Interface de coleta com alternativas interativas, indicadores visuais de seleção e navegação rápida.*
+
+![Tela de Conclusao](docs/screenshots/10_conclusao_pesquisa.png)
+*Figura 10: Confirmação de encerramento da entrevista e persistência segura em banco de dados.*
+
+---
+
+## 4. Pré-requisitos
 
 Para compilação e execução do projeto em ambiente Windows:
 
@@ -42,7 +91,7 @@ Para compilação e execução do projeto em ambiente Windows:
 
 ---
 
-## 4. Configuração do Banco de Dados
+## 5. Configuração do Banco de Dados
 
 Os scripts SQL necessários para a criação do banco de dados, estrutura de tabelas, integridade referencial, views de tabulação e carga inicial encontram-se na pasta `database/`.
 
@@ -89,7 +138,7 @@ Este script popula a tabela de tipos de resposta com as definições essenciais 
 
 ---
 
-## 5. Configuração da Aplicação
+## 6. Configuração da Aplicação
 
 A conexão com o banco de dados pode ser ajustada de duas formas:
 
@@ -138,7 +187,7 @@ Para liberar os botões de cadastro na tela principal:
 
 ---
 
-## 6. Compilação e Execução
+## 7. Compilação e Execução
 
 ### Via Visual Studio
 
@@ -158,19 +207,33 @@ msbuild src\SurveyDataEntry.sln /p:Configuration=Release
 O executável binário final estará disponível em:
 `src/SurveyDataEntry/bin/Release/SurveyDataEntry.exe`
 
+### Geração Automatizada de Capturas de Tela
+
+O repositório inclui um script em PowerShell para geração automatizada dos prints demonstrativos da interface:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File scripts\capture_screenshots.ps1
+```
+
+As imagens geradas são salvas na pasta `docs/screenshots/`.
+
 ---
 
-## 7. Estrutura do Repositório
+## 8. Estrutura do Repositório
 
 ```
 .
 |-- .gitignore                  # Regras de exclusao do Git para artefatos e binarios
-|-- README.md                   # Documentacao tecnica do projeto
+|-- README.md                   # Documentacao tecnica do projeto com prints de tela
 |-- plano.md                    # Planejamento e registro de execucao das etapas
 |-- database/                   # Scripts SQL para implantacao do banco de dados
 |   |-- 01_schema.sql           # DDL: definicao de tabelas, chaves e constraints
 |   |-- 02_views.sql            # Views para tabulacao e consolidacao de respostas
 |   `-- 03_seed_tipos.sql       # Dados estruturais iniciais (tipos de resposta, estados)
+|-- docs/                       # Documentacao visual e capturas de tela
+|   `-- screenshots/            # Imagens demonstrativas das interfaces do sistema
+|-- scripts/                    # Scripts utilitarios e automacao
+|   `-- capture_screenshots.ps1 # Automacao para captura off-screen dos formularios
 `-- src/                        # Codigo-fonte da aplicacao
     |-- SurveyDataEntry.sln     # Arquivo de solucao do Visual Studio
     `-- SurveyDataEntry/        # Projeto C# Windows Forms
@@ -190,7 +253,7 @@ O executável binário final estará disponível em:
 
 ---
 
-## 8. Modelo de Dados Relacional
+## 9. Modelo de Dados Relacional
 
 ```
 [ cliente_requerente ]
@@ -200,8 +263,7 @@ O executável binário final estará disponível em:
 [ formulario_pesquisa ]
        | 1
        |
-       +-------------------------------+
-       | N                             | N
+       | N
 [ pergunta_formulario ]     [ coleta_dados_questionario ] <--- [ coleta_posto ]
        | 1                             | 1
        |                               |

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
@@ -47,7 +47,7 @@ namespace SurveyDataEntry
             if (!((System.Environment.OSVersion.Version.Minor != 0) && (System.Environment.OSVersion.Version.Major==6)))
             {
                 //CASO FOR NAO Win7 ELE MUDA A COR DAS BARRAS!
-                this.pnl_resposta.BackColor = Color.LightSteelBlue;
+                this.pnl_resposta.BackColor = Color.White;
             }
         }
         public int ler_tipoResposta()
@@ -149,7 +149,10 @@ namespace SurveyDataEntry
             }
             else 
             {
-                MessageBox.Show(null,"Impossivel obter dados de autocompletar, verifique a conexão com o banco de dados!","Atenção!",MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                if (!ConexaoBD.Silencioso)
+                {
+                    MessageBox.Show(null,"Impossivel obter dados de autocompletar, verifique a conexão com o banco de dados!","Atenção!",MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                }
             }
         }
         //**********************variaveis internas - fim*********************
@@ -223,8 +226,9 @@ namespace SurveyDataEntry
             //marca com cor as selecionadas!
             if (this.chk_marcador.Checked == true)
             {
-                this.BackColor = Color.DarkOrange;
-                this.chk_marcador.BackColor = Color.DarkOrange;
+                this.pnl_resposta.BackColor = Color.FromArgb(239, 246, 255);
+                this.chk_marcador.BackColor = Color.FromArgb(37, 99, 235);
+                this.chk_marcador.ForeColor = Color.White;
                 //caso for qttvo autoseleciona o proximo indece de 1 a 3 que falta, na ordem, para cada seleção que faz!
                 if (this.tipoResposta == 3)
                 {
@@ -261,8 +265,9 @@ namespace SurveyDataEntry
             }
             else 
             {
-                this.BackColor = Color.White;
-                this.chk_marcador.BackColor = Color.White;
+                this.pnl_resposta.BackColor = Color.White;
+                this.chk_marcador.BackColor = Color.FromArgb(241, 245, 249);
+                this.chk_marcador.ForeColor = Color.FromArgb(30, 41, 59);
             }
         }
         public void autoPreencherEstadoPelaCidade(String cidade)
