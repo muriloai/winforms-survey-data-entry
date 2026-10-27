@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -24,7 +24,7 @@ namespace SurveyDataEntry
         }
         private void seguirOusair()
         {
-            if (frm.get_qtdIDS_pergunta() > 0) //se tiver pergunta pra ser respondida!
+            if (frm != null && frm.get_qtdIDS_pergunta() > 0) //se tiver pergunta pra ser respondida!
             {
                 if (MessageBox.Show(null, "Deseja Responder Mais Uma em Seguida?", "MAIS UMA RODADA?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
@@ -48,14 +48,14 @@ namespace SurveyDataEntry
         }
         private void btn_voltar_Click(object sender, EventArgs e)
         {
-            frm.Close();
+            if (frm != null) frm.Close();
             this.Close();
         }
 
         private void tela_final_Load(object sender, EventArgs e)
         {
             btn_deNovoPesquisa.Focus();
-            if (frm.get_qtdIDS_pergunta() > 0) //se tiver pergunta pra ser respondida!
+            if (frm != null && frm.get_qtdIDS_pergunta() > 0) //se tiver pergunta pra ser respondida!
             {
             }
             else 

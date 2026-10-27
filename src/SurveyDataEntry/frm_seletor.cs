@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -188,6 +188,11 @@ namespace SurveyDataEntry
                 }
 
             }
+        }
+
+        private void btn_cancelar_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
 
         private void frm_seletor_KeyUp(object sender, KeyEventArgs e)

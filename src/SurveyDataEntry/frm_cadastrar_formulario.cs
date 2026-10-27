@@ -50,6 +50,11 @@ namespace SurveyDataEntry
             }
         }
 
+        private void btn_cancelar_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
         private void frm_cadastrar_posto_coleta_Load(object sender, EventArgs e)
         {
             if (this.id_cliente > 0)
@@ -68,7 +73,11 @@ namespace SurveyDataEntry
 
         private void frm_cadastrar_formulario_KeyUp(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Enter && !string.IsNullOrEmpty((this.txt_formulario.Text ?? "").Trim()))
+            if (e.KeyCode == Keys.Escape)
+            {
+                this.Close();
+            }
+            else if (e.KeyCode == Keys.Enter && !string.IsNullOrEmpty((this.txt_formulario.Text ?? "").Trim()))
             {
                 btn_cad_formulario_Click(this, null);
             }

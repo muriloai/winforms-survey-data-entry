@@ -6,7 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using MySql.Data.MySqlClient;
+using System.Data.SQLite;
 
 namespace SurveyDataEntry
 {
@@ -34,7 +34,7 @@ namespace SurveyDataEntry
         public int get_qtdIDS_pergunta()
         {
             //metodo montado para saber se tem algum id de perguntas carregado!
-            return this.IDs_perguntas.Count;
+            return this.IDs_perguntas != null ? this.IDs_perguntas.Count : 0;
         }
         public frm_responder_pesquisa(int ID_formulario, int id_posto_coleta)
         {
@@ -557,7 +557,7 @@ namespace SurveyDataEntry
             if (ConexaoBD.abrirConexao())
             {
                 int cont = 0;
-                MySqlTransaction transacao = ConexaoBD.getConexao().BeginTransaction();
+                SQLiteTransaction transacao = ConexaoBD.getConexao().BeginTransaction();
                 //gero registro de um novo questionario de dependencia!
                 int id_questionario = dados.inserir_umQuestionarioEReceberIDdele(id_posto_coleta, ID_formulario, transacao);
                 for (cont = 0; cont < ListaDeRespostasEfetuadas.Count; cont++)

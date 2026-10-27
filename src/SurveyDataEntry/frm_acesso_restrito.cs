@@ -34,13 +34,23 @@ namespace SurveyDataEntry
             }
         }
 
+        private void btn_cancelar_Click(object sender, EventArgs e)
+        {
+            menu.liberar_areaRestrita(0);
+            this.Close();
+        }
+
         private void frm_acesso_restrito_Load(object sender, EventArgs e)
         {
         }
 
         private void frm_acesso_restrito_KeyUp(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Enter && !string.IsNullOrEmpty(txt_senha.Text) && !string.IsNullOrEmpty(txt_login.Text))
+            if (e.KeyCode == Keys.Escape)
+            {
+                btn_cancelar_Click(this, null);
+            }
+            else if (e.KeyCode == Keys.Enter && !string.IsNullOrEmpty(txt_senha.Text) && !string.IsNullOrEmpty(txt_login.Text))
             {
                 btn_entrar_Click(this, null);
             }

@@ -47,13 +47,22 @@ namespace SurveyDataEntry
             }
         }
 
+        private void btn_cancelar_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
         private void frm_cadastrar_posto_coleta_Load(object sender, EventArgs e)
         {
         }
 
         private void frm_cadastrar_cliente_KeyUp(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Enter && !string.IsNullOrEmpty((this.txt_cliente_nome.Text ?? "").Trim()))
+            if (e.KeyCode == Keys.Escape)
+            {
+                this.Close();
+            }
+            else if (e.KeyCode == Keys.Enter && !string.IsNullOrEmpty((this.txt_cliente_nome.Text ?? "").Trim()))
             {
                 btn_cad_cliente_Click(this, null);
             }
