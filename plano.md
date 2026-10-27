@@ -4,7 +4,7 @@
 
 Este repositório continha em `.refs/` o código-fonte legado de um sistema desktop desenvolvido em C# WinForms (.NET Framework). O sistema permite cadastrar clientes, formulários de pesquisa, perguntas, respostas, postos de coleta e aplicar questionários em campo, além de contabilizar resultados por meio de views no banco de dados.
 
-O objetivo foi trazer esse sistema para a raiz do repositório de forma limpa e funcional, refatorar a camada de dados para SQLite eliminando qualquer dependência de servidores externos (como MySQL), garantir auto-inicialização na primeira execução e documentar tudo com um README profissional sem emojis e sem citações a marcas ou empresas legadas.
+O objetivo foi trazer esse sistema para a raiz do repositório de forma limpa e funcional, refatorar a camada de dados para SQLite eliminando qualquer dependência de servidores externos (como MySQL), garantir auto-inicialização na primeira execução, expurgar ilustrações legadas/figuras humanas e criar uma identidade visual clean com logotipo corporativo em PNG/WebP, documentando tudo com um README profissional sem emojis e sem citações a marcas ou empresas legadas.
 
 ---
 
@@ -31,15 +31,13 @@ O objetivo foi trazer esse sistema para a raiz do repositório de forma limpa e 
 5. **Parametrização Total das Consultas**: Consultas protegidas contra SQL Injection utilizando parâmetros tipados (`@param`).
 6. **Validação de Formulários**: Validação de campos obrigatórios e conversão segura de tipos em todas as telas de cadastro.
 7. **Identidade Visual Neutra e Substituição de Imagens de Marcas**:
-   - `logo_dtChico.png` substituído por `logo_survey.png` (801x559 px).
-   - `chico_001.png` substituído por `survey_hero.png` (902x1852 px).
    - Título da janela principal padronizado para `"Survey Data Entry - Tabulador de Pesquisas"`.
    - Credenciais de acesso administrativo padronizadas para `admin` / `admin`.
 
 ### Fase 5 -- Refinamento Visual de Layout e Documentação Fotográfica
 1. **Modernização Tipográfica e Cromática**: Adoção de Segoe UI, paleta corporativa neutra (Slate / Blue) e botões planos com feedback visual.
 2. **Reestruturação dos Formulários**:
-   - `frm_menu`: Top bar corporativa com indicadores de status, cartões de ação e painel deslizante de gestão.
+   - `frm_menu`: Top bar corporativa com indicadores de status, cartões de ação e painel de gestão.
    - `frm_acesso_restrito`: Caixa de diálogo modal compacta com foco automático e atalhos de confirmação/cancelamento.
    - `frm_seletor`: Diálogo seletor redimensionado para proporções amigáveis.
    - `frm_cadastrar_*`: Telas de cadastro (Cliente, Posto, Formulário, Pergunta, Resposta) com cabeçalhos padronizados e eliminação de larguras excessivas.
@@ -62,10 +60,23 @@ O objetivo foi trazer esse sistema para a raiz do repositório de forma limpa e 
    - Atualização da função de recuperação do identificador gerado de `SELECT LAST_INSERT_ID()` para `SELECT last_insert_rowid();`.
    - Atualização de data do sistema de `CURDATE()` para `DATE('now')`.
    - Ajuste de parâmetros booleanos para texto explícito (`"s"` e `"n"`), garantindo correspondência com constraints do SQLite.
-4. **Indicador Visual na Interface**:
-   - Atualização do selo de status da barra superior em `frm_menu` para `"● SQLite: survey.db"`.
-5. **Atualização de Capturas de Tela**:
-   - Execução do script automatizado para regerar todas as imagens de demonstração refletindo o novo status do SQLite.
+
+### Fase 7 -- Identidade Visual Clean e Remoção Completa de Figuras Humanas
+1. **Remoção de Ilustrações e Figuras Humanas**:
+   - Exclusão definitiva de `survey_hero.png` (imagem com figura humana / atendente) do projeto, da pasta `Resources/` e de `Resources.resx`.
+2. **Criação de Logotipo Clean Corporativo**:
+   - Geração de logotipo moderno minimalista nos formatos PNG (alta definição, com transparência alfa) e WebP em `src/SurveyDataEntry/Resources/logo_survey.png`, `logo_survey.webp` e cópias em `docs/`.
+   - Emblema em gradiente azul corporativo com prancheta de questionário e tipografia nítida (Segoe UI).
+3. **Painel Informativo na Tela Principal (`frm_menu`)**:
+   - Em substituição à antiga área do personagem, inclusão de um painel informativo modular (`pnl_hero`) com as 3 etapas de fluxo operacional:
+     - 01. Estruturação & Cadastros (clientes, formulários, perguntas e regras);
+     - 02. Aplicação Ágil em Campo (digitação rápida por teclado numérico);
+     - 03. Tabulação & Consolidação (persistência atômica e balanço em tempo real).
+   - Inclusão do selo permanente de status do banco de dados SQLite.
+4. **Padronização Visual dos Botões**:
+   - Eliminação dos gradientes antigos em bitmap (`btn_01.png`) em favor do estilo Flat limpo (`#2563EB`, texto branco, bordas nítidas).
+5. **Atualização Completa dos Screenshots**:
+   - Reexecução do script `scripts/capture_screenshots.ps1` atualizando todos os 10 prints demonstrativos em `docs/screenshots/`.
 
 ---
 
@@ -73,4 +84,4 @@ O objetivo foi trazer esse sistema para a raiz do repositório de forma limpa e 
 
 - Compilação limpa no MSBuild para configurações `Debug` e `Release` com 0 erros e 0 avisos.
 - Verificação funcional com teste de integração automatizado cobrindo criação de base, inserções relacionais, transações atômicas e consultas em cascata.
-- Geração completa e automatizada dos 10 prints demonstrativos em `docs/screenshots/`.
+- Geração completa e automatizada dos 10 prints demonstrativos em `docs/screenshots/` refletindo a nova identidade visual clean.
