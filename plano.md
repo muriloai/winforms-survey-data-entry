@@ -24,7 +24,7 @@ O objetivo foi trazer esse sistema para a raiz do repositório de forma limpa e 
 - `README.md` redigido com padrão técnico corporativo, sem emojis e sem referências a marcas comerciais do software legado.
 
 ### Fase 4 -- Melhorias Arquiteturais Implementadas
-1. **Namespace Unificado**: Atualização completa de `dataChico_tabulador_pesquisas` para `SurveyDataEntry`.
+1. **Namespace Unificado**: Atualização completa do namespace legado para `SurveyDataEntry`.
 2. **Externalização da String de Conexão**: Suporte nativo a `connectionStrings` e `userSettings` no `app.config`, com persistência via `Properties.Settings.Default.Save()`.
 3. **Prevenção de Vazamento de Conexão e Leitores**: Uso de blocos `using (SQLiteCommand ...)` e `using (SQLiteDataReader ...)`.
 4. **Eliminação de Execuções Redundantes**: Removido o `ExecuteNonQuery()` desnecessário antes de `ExecuteReader()`.
@@ -78,6 +78,18 @@ O objetivo foi trazer esse sistema para a raiz do repositório de forma limpa e 
 5. **Atualização Completa dos Screenshots**:
    - Reexecução do script `scripts/capture_screenshots.ps1` atualizando todos os 10 prints demonstrativos em `docs/screenshots/`.
 
+### Fase 8 -- Documentação Histórica e Memória Técnica do Software
+1. **Criação de `HISTORIA.md`**:
+   - Registro detalhado das origens do sistema em 2014, o modelo de desenvolvimento inicial em WinForms e a dependência original do MySQL.
+   - Documentação dos desafios técnicos da época (scripts DDL não versionados e perdidos com o tempo, consultas concatenadas e acoplamento a servidores externos).
+   - Detalhamento do processo de modernização e rebranding (reconstituição do schema, transição para SQLite embutido com auto-inicialização e transações ACID, e reconstrução visual com Segoe UI e logotipo minimalista).
+2. **Preservação de Ativos e Capturas Legadas (`docs/legacy/`)**:
+   - Resgate dos prints históricos via histórico do Git para `docs/legacy/01_menu_legado_mascote.png` e `docs/legacy/02_menu_gestao_legado.png`.
+   - Preservação da textura original de botão dos anos 2010 (`docs/legacy/btn_01_legado.png`) e da identidade anterior (`docs/legacy/logo_legado.png`).
+   - Tabelas comparativas lado a lado evidenciando as transformações de layout e arquitetura.
+3. **Encadeamento Bidirecional de Documentação**:
+   - Vinculação cruzada entre `README.md` e `HISTORIA.md`.
+
 ---
 
 ## 3. Status de Validação
@@ -85,3 +97,4 @@ O objetivo foi trazer esse sistema para a raiz do repositório de forma limpa e 
 - Compilação limpa no MSBuild para configurações `Debug` e `Release` com 0 erros e 0 avisos.
 - Verificação funcional com teste de integração automatizado cobrindo criação de base, inserções relacionais, transações atômicas e consultas em cascata.
 - Geração completa e automatizada dos 10 prints demonstrativos em `docs/screenshots/` refletindo a nova identidade visual clean.
+- Documentação histórica completa em `HISTORIA.md` integrada e apontada no `README.md` principal.
