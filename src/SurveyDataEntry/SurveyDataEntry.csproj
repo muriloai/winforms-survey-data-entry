@@ -179,7 +179,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\survey_hero.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\logo_survey.png" />

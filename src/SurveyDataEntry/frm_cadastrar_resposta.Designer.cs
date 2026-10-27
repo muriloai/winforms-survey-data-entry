@@ -1,4 +1,4 @@
-﻿namespace SurveyDataEntry
+namespace SurveyDataEntry
 {
     partial class frm_cadastrar_resposta
     {
@@ -211,8 +211,11 @@
             // btn_cadResp
             // 
             this.btn_cadResp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_cadResp.BackgroundImage = global::SurveyDataEntry.Properties.Resources.btn_01;
-            this.btn_cadResp.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btn_cadResp.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(99)))), ((int)(((byte)(235)))));
+            this.btn_cadResp.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_cadResp.FlatAppearance.BorderSize = 0;
+            this.btn_cadResp.ForeColor = System.Drawing.Color.White;
+            this.btn_cadResp.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btn_cadResp.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_cadResp.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_cadResp.ForeColor = System.Drawing.SystemColors.ButtonFace;

@@ -1,4 +1,4 @@
-﻿namespace SurveyDataEntry
+namespace SurveyDataEntry
 {
     partial class frm_cadastrar_formulario
     {
@@ -59,8 +59,11 @@
             // 
             this.btn_cad_formulario.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_cad_formulario.BackgroundImage = global::SurveyDataEntry.Properties.Resources.btn_01;
-            this.btn_cad_formulario.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btn_cad_formulario.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(99)))), ((int)(((byte)(235)))));
+            this.btn_cad_formulario.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_cad_formulario.FlatAppearance.BorderSize = 0;
+            this.btn_cad_formulario.ForeColor = System.Drawing.Color.White;
+            this.btn_cad_formulario.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btn_cad_formulario.Font = new System.Drawing.Font("Tahoma", 15.75F);
             this.btn_cad_formulario.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.btn_cad_formulario.Location = new System.Drawing.Point(636, 94);

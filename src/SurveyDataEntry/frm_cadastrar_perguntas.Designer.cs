@@ -1,4 +1,4 @@
-﻿namespace SurveyDataEntry
+namespace SurveyDataEntry
 {
     partial class frm_cadastrar_perguntas
     {
@@ -42,8 +42,11 @@
             // 
             this.btn_cad_pergunta.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_cad_pergunta.BackgroundImage = global::SurveyDataEntry.Properties.Resources.btn_01;
-            this.btn_cad_pergunta.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btn_cad_pergunta.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(99)))), ((int)(((byte)(235)))));
+            this.btn_cad_pergunta.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_cad_pergunta.FlatAppearance.BorderSize = 0;
+            this.btn_cad_pergunta.ForeColor = System.Drawing.Color.White;
+            this.btn_cad_pergunta.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btn_cad_pergunta.Font = new System.Drawing.Font("Tahoma", 15.75F);
             this.btn_cad_pergunta.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.btn_cad_pergunta.Location = new System.Drawing.Point(11, 109);

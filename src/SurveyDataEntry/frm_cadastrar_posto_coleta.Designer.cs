@@ -1,4 +1,4 @@
-﻿namespace SurveyDataEntry
+namespace SurveyDataEntry
 {
     partial class frm_cadastrar_posto_coleta
     {
@@ -55,8 +55,11 @@
             // 
             this.btn_cad_posto.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_cad_posto.BackgroundImage = global::SurveyDataEntry.Properties.Resources.btn_01;
-            this.btn_cad_posto.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btn_cad_posto.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(99)))), ((int)(((byte)(235)))));
+            this.btn_cad_posto.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_cad_posto.FlatAppearance.BorderSize = 0;
+            this.btn_cad_posto.ForeColor = System.Drawing.Color.White;
+            this.btn_cad_posto.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btn_cad_posto.Font = new System.Drawing.Font("Tahoma", 15.75F);
             this.btn_cad_posto.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.btn_cad_posto.Location = new System.Drawing.Point(575, 86);

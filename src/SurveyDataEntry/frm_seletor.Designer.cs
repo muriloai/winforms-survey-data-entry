@@ -1,4 +1,4 @@
-﻿namespace SurveyDataEntry
+namespace SurveyDataEntry
 {
     partial class frm_seletor
     {
@@ -45,8 +45,11 @@
             // 
             // btn_selecionar
             // 
-            this.btn_selecionar.BackgroundImage = global::SurveyDataEntry.Properties.Resources.btn_01;
-            this.btn_selecionar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btn_selecionar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(99)))), ((int)(((byte)(235)))));
+            this.btn_selecionar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_selecionar.FlatAppearance.BorderSize = 0;
+            this.btn_selecionar.ForeColor = System.Drawing.Color.White;
+            this.btn_selecionar.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btn_selecionar.Font = new System.Drawing.Font("Tahoma", 18F);
             this.btn_selecionar.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.btn_selecionar.Location = new System.Drawing.Point(781, 69);

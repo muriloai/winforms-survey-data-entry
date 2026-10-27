@@ -1,4 +1,4 @@
-﻿namespace SurveyDataEntry
+namespace SurveyDataEntry
 {
     partial class frm_responder_pesquisa
     {
@@ -54,8 +54,11 @@
             // btn_voltar
             // 
             this.btn_voltar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btn_voltar.BackgroundImage = global::SurveyDataEntry.Properties.Resources.btn_01;
-            this.btn_voltar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btn_voltar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(99)))), ((int)(((byte)(235)))));
+            this.btn_voltar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_voltar.FlatAppearance.BorderSize = 0;
+            this.btn_voltar.ForeColor = System.Drawing.Color.White;
+            this.btn_voltar.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btn_voltar.Font = new System.Drawing.Font("Tahoma", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_voltar.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.btn_voltar.Location = new System.Drawing.Point(180, 559);
@@ -138,8 +141,11 @@
             // btn_responder
             // 
             this.btn_responder.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_responder.BackgroundImage = global::SurveyDataEntry.Properties.Resources.btn_01;
-            this.btn_responder.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btn_responder.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(99)))), ((int)(((byte)(235)))));
+            this.btn_responder.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_responder.FlatAppearance.BorderSize = 0;
+            this.btn_responder.ForeColor = System.Drawing.Color.White;
+            this.btn_responder.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btn_responder.Font = new System.Drawing.Font("Tahoma", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_responder.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.btn_responder.Location = new System.Drawing.Point(559, 560);
