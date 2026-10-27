@@ -100,7 +100,7 @@ namespace SurveyDataEntry
             this.lbl_db_indicator.Padding = new System.Windows.Forms.Padding(8, 0, 8, 0);
             this.lbl_db_indicator.Size = new System.Drawing.Size(160, 30);
             this.lbl_db_indicator.TabIndex = 3;
-            this.lbl_db_indicator.Text = "● MySQL: survey_db";
+            this.lbl_db_indicator.Text = "● SQLite: survey.db";
             this.lbl_db_indicator.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // lbl_app_subtitle
