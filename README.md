@@ -1,5 +1,7 @@
 # Survey Data Entry
 
+![Survey Data Entry Logo](docs/logo_survey.png)
+
 Sistema desktop desenvolvido em Windows Forms (C# / .NET Framework) integrado ao banco de dados SQLite para modelagem, coleta de campo, controle operacional e tabulação analítica de pesquisas qualitativas e quantitativas.
 
 ---
@@ -10,7 +12,7 @@ O Survey Data Entry gerencia o ciclo completo de operações de pesquisas presen
 
 A arquitetura utiliza o banco de dados embutido **SQLite**, eliminando a necessidade de instalação ou configuração de servidores de banco de dados externos (como MySQL ou SQL Server). O sistema realiza a auto-inicialização da estrutura relacional (tabelas, índices, triggers, views e dados estruturais) logo na primeira inicialização caso o arquivo do banco de dados ainda não exista.
 
-A camada de persistência opera com comandos SQL parametrizados e controle transacional atômico (ACID), garantindo total integridade dos dados durante a aplicação e envio de questionários.
+A camada de persistência opera com comandos SQL parametrizados e controle transacional atômico (ACID), garantindo total integridade dos dados durante a aplicação e envio de questionários. A interface do sistema adota identidade visual limpa e profissional, sem ilustrações ou figuras de personagens, com logotipo moderno disponibilizado nos formatos PNG e WebP.
 
 ---
 
@@ -18,6 +20,8 @@ A camada de persistência opera com comandos SQL parametrizados e controle trans
 
 - **Banco de Dados Embutido (Zero Configuração)**: Opera sobre arquivo local SQLite (`survey.db`), permitindo portabilidade total do executável sem instalação de serviços de banco de dados.
 - **Auto-inicialização de Estrutura**: Criação automática do schema relacional, views analíticas e dados sementes (seed) na primeira execução.
+- **Identidade Visual Clean**: Design corporativo focado em usabilidade, com novo logotipo minimalista (PNG e WebP) e ausência de ilustrações ou figuras de personagens.
+- **Painel Informativo Integrado**: Exibição estruturada do fluxo de trabalho na tela principal (Estruturação, Coleta e Tabulação) com monitor de status do banco.
 - **Gestão de Clientes Solicitantes**: Cadastro e manutenção de clientes demandantes de pesquisas.
 - **Estruturação de Formulários**: Criação de questionários associados a clientes com prazos de entrega e controle de status.
 - **Definição Dinâmica de Perguntas**: Suporte a ordem/sequência de apresentação, obrigatoriedade de preenchimento e limite máximo de alternativas assinaladas.
@@ -40,10 +44,10 @@ A interface gráfica do sistema adota tipografia corporativa padronizada (Segoe 
 
 ### 3.1 Painel Principal (Dashboard)
 
-A tela principal centraliza os indicadores operacionais do sistema, atalhos de inicialização de pesquisas, o indicador de status do SQLite e o acesso ao painel de gestão.
+A tela principal centraliza os indicadores operacionais do sistema, atalhos de inicialização de pesquisas, o indicador de status do SQLite e o acesso ao painel de gestão. O painel central direito apresenta o fluxo de trabalho detalhado do sistema em três etapas objetivas.
 
 ![Painel Principal - Modo Operador](docs/screenshots/01_menu_principal.png)
-*Figura 1: Dashboard principal do operador com cartões de status e acionamento de pesquisas.*
+*Figura 1: Dashboard principal do operador com fluxo operacional e acionamento de pesquisas.*
 
 ![Painel de Gestao Administrativa](docs/screenshots/02_menu_gestao.png)
 *Figura 2: Dashboard com módulo administrativo desbloqueado para gerenciamento estrutural.*
@@ -209,6 +213,8 @@ As imagens geradas são salvas na pasta `docs/screenshots/`.
 |   |-- 02_views.sql            # Views para tabulacao e consolidacao de respostas
 |   `-- 03_seed_tipos.sql       # Dados estruturais iniciais (tipos de resposta, estados)
 |-- docs/                       # Documentacao visual e capturas de tela
+|   |-- logo_survey.png         # Logotipo clean corporativo (PNG com transparencia)
+|   |-- logo_survey.webp        # Logotipo clean corporativo (formato WebP)
 |   `-- screenshots/            # Imagens demonstrativas das interfaces do sistema
 |-- scripts/                    # Scripts utilitarios e automacao
 |   `-- capture_screenshots.ps1 # Automacao para captura off-screen dos formularios
@@ -229,7 +235,7 @@ As imagens geradas são salvas na pasta `docs/screenshots/`.
         |   |-- x64/SQLite.Interop.dll
         |   `-- x86/SQLite.Interop.dll
         |-- Properties/         # Metadados de montagem, recursos e settings
-        `-- Resources/          # Ativos visuais e icones de suporte
+        `-- Resources/          # Ativos visuais corporativos (logo_survey.png, logo_survey.webp)
 ```
 
 ---
