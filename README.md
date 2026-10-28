@@ -6,7 +6,7 @@ Sistema desktop desenvolvido em Windows Forms (C# / .NET Framework) integrado ao
 
 ---
 
-## 1. Visão Geral
+## Visão Geral
 
 O Survey Data Entry gerencia o ciclo completo de operações de pesquisas presenciais: desde o cadastramento de formulários e questionários estruturados até a aplicação das entrevistas em postos de coleta e a consolidação dos resultados tabulados.
 
@@ -22,7 +22,7 @@ Para conhecer a história completa do desenvolvimento deste software desde a sua
 
 ---
 
-## 2. Principais Funcionalidades
+## Principais Funcionalidades
 
 - **Banco de Dados Embutido (Zero Configuração)**: Opera sobre arquivo local SQLite (`survey.db`), permitindo portabilidade total do executável sem instalação de serviços de banco de dados.
 - **Auto-inicialização de Estrutura**: Criação automática do schema relacional, views analíticas e dados sementes (seed) na primeira execução.
@@ -44,11 +44,11 @@ Para conhecer a história completa do desenvolvimento deste software desde a sua
 
 ---
 
-## 3. Interface do Sistema
+## Interface do Sistema
 
 A interface gráfica do sistema adota tipografia corporativa padronizada (Segoe UI), layout baseado em cartões modulares, contraste visual aprimorado e botões planos de alta usabilidade, eliminando elementos legados desproporcionais e garantindo velocidade de digitação para operadores de campo.
 
-### 3.1 Painel Principal (Dashboard)
+### Painel Principal (Dashboard)
 
 A tela principal centraliza os indicadores operacionais do sistema, atalhos de inicialização de pesquisas, o indicador de status do SQLite e o acesso ao painel de gestão. O painel central direito apresenta o fluxo de trabalho detalhado do sistema em três etapas objetivas.
 
@@ -58,7 +58,7 @@ A tela principal centraliza os indicadores operacionais do sistema, atalhos de i
 ![Painel de Gestao Administrativa](docs/screenshots/02_menu_gestao.png)
 *Figura 2: Dashboard com módulo administrativo desbloqueado para gerenciamento estrutural.*
 
-### 3.2 Modais de Autenticação e Seleção
+### Modais de Autenticação e Seleção
 
 O controle de acesso administrativo e as rotinas de seleção utilizam caixas de diálogo modais compactas, com cabeçalho contrastante e foco automático nos campos de entrada.
 
@@ -67,7 +67,7 @@ O controle de acesso administrativo e as rotinas de seleção utilizam caixas de
 | ![Autenticacao](docs/screenshots/03_autenticacao.png) | ![Seletor](docs/screenshots/04_seletor.png) |
 | *Figura 3: Modal de autenticação para desbloqueio da área restrita.* | *Figura 4: Seletor universal de clientes, formulários e perguntas.* |
 
-### 3.3 Formulários de Cadastro e Gestão Estrutural
+### Formulários de Cadastro e Gestão Estrutural
 
 As telas de cadastramento foram redimensionadas para proporções ergonômicas, facilitando o preenchimento sem dispersão visual:
 
@@ -81,7 +81,7 @@ As telas de cadastramento foram redimensionadas para proporções ergonômicas, 
 | ![Cadastro de Formulario](docs/screenshots/07_cadastro_formulario.png) | ![Cadastro de Pergunta](docs/screenshots/08_cadastro_pergunta.png) |
 | *Figura 7: Definição de questionários e datas limites.* | *Figura 8: Parametrização de perguntas, ordem e regras.* |
 
-### 3.4 Aplicação e Finalização de Questionários
+### Aplicação e Finalização de Questionários
 
 O fluxo de coleta de dados foi projetado para máxima velocidade de entrada via teclado, com cartões de alternativas destacados, suporte a justificativas em texto aberto e escala de avaliação quantitativa:
 
@@ -93,7 +93,7 @@ O fluxo de coleta de dados foi projetado para máxima velocidade de entrada via 
 
 ---
 
-## 4. Pré-requisitos
+## Pré-requisitos
 
 Para compilação e execução do projeto em ambiente Windows:
 
@@ -105,7 +105,7 @@ Para compilação e execução do projeto em ambiente Windows:
 
 ---
 
-## 5. Banco de Dados e Inicialização
+## Banco de Dados e Inicialização
 
 O sistema foi concebido para ser autônomo. Ao ser iniciado:
 
@@ -136,7 +136,7 @@ sqlite3 survey.db < database/03_seed_tipos.sql
 
 ---
 
-## 6. Configuração da Aplicação
+## Configuração da Aplicação
 
 ### Configuração do Arquivo de Banco de Dados
 
@@ -173,7 +173,7 @@ Para liberar os botões de cadastro na tela principal:
 
 ---
 
-## 7. Compilação e Execução
+## Compilação e Execução
 
 ### Via Visual Studio
 
@@ -207,7 +207,7 @@ As imagens geradas são salvas na pasta `docs/screenshots/`.
 
 ---
 
-## 8. Estrutura do Repositório
+## Estrutura do Repositório
 
 ```
 .
@@ -249,7 +249,7 @@ As imagens geradas são salvas na pasta `docs/screenshots/`.
 
 ---
 
-## 9. Modelo de Dados Relacional
+## Modelo de Dados Relacional
 
 ```
 [ cliente_requerente ]
@@ -273,7 +273,7 @@ As imagens geradas são salvas na pasta `docs/screenshots/`.
 
 ---
 
-## 10. Histórico e Memória Técnica
+## Histórico e Memória Técnica
 
 O projeto possui documentação aprofundada sobre a sua trajetória histórica, abordando a arquitetura original de 2014 desenvolvida em WinForms + MySQL, os desafios da modelagem de dados sem scripts versionados, as telas legadas com mascote e degradês de bitmap, e o processo completo de modernização que culminou no suporte a SQLite embutido, transações ACID, padronização de codificação UTF-8 e novo design corporativo minimalista com iconologia gráfica dedicada.
 
