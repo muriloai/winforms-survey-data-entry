@@ -13,6 +13,7 @@
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ApplicationIcon>ic_rm.ico</ApplicationIcon>
+    <CodePage>65001</CodePage>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -190,6 +191,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\logo_survey.png" />
+    <None Include="Resources\ic_success.png" />
+    <None Include="Resources\ic_warning.png" />
+    <None Include="Resources\ic_error.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\ic_info.png" />

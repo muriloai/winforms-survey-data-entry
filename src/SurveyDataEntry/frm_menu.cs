@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -147,7 +147,7 @@ namespace SurveyDataEntry
 
         private void btn_aplicarLocalDB_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show(null, "Deseja realmente aplicar esta configuração?", "ATENÇÃO!", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            if (MessageBox.Show(null, "Deseja realmente aplicar esta configuração?", "Confirmação", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
                 Properties.Settings.Default.serverLocal = txt_localDB.Text.Trim();
                 Properties.Settings.Default.Save();

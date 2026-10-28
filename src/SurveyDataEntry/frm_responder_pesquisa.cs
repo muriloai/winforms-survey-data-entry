@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -143,7 +143,7 @@ namespace SurveyDataEntry
                         }
                         else
                         {                           
-                            MessageBox.Show(null, "Problemas ao Cadatrar! \nPorém, Fique Tranquilo Nenhum Dado foi Inserido!", "ERRO!", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                            MessageBox.Show("Ocorreu uma falha ao gravar o questionário. Nenhuma informação foi inserida no banco de dados. Por favor, tente novamente.", "Falha na Gravação", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         }
                         this.gravou = false;
                         this.KeyPreview = true;
@@ -372,13 +372,13 @@ namespace SurveyDataEntry
                 //senao avisa urgentemente!
                 else
                 {
-                    MessageBox.Show("Revise, completando os campos e tente novamente!");
+                    MessageBox.Show("Por favor, preencha todos os campos obrigatórios antes de continuar.", "Validação de Dados", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return false;
                 }
             }
             else
             {
-                MessageBox.Show("Conecte-se a Fonte do Banco de Dados, para Conseguir Registrar esses dados!");
+                MessageBox.Show("Não foi possível conectar ao banco de dados local. Verifique o arquivo da base de dados.", "Falha de Conexão", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
         }      
@@ -453,7 +453,7 @@ namespace SurveyDataEntry
                     //se a qtd de opções marcadas for menor ou igual a zero!
                     if((getQtdRespJaMarcada() <= 0))
                     {
-                        MessageBox.Show(null,"Esta Pergunta não Permite ser Registrada sem Escolher Nenhuma Opção!","ATENÇÃO!",MessageBoxButtons.OK,MessageBoxIcon.Exclamation);
+                        MessageBox.Show("Esta pergunta é de preenchimento obrigatório. Selecione ao menos uma opção antes de avançar.", "Resposta Obrigatória", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     }
                     else
                     {
@@ -486,7 +486,7 @@ namespace SurveyDataEntry
             }
             else 
             {
-                MessageBox.Show(null,"O Limite de opções Marcadas é de: "+novaResposta.getMaxPerm()+"\nDesmarque algumas opções e tente novamente!","ATENÇÃO!",MessageBoxButtons.OK,MessageBoxIcon.Exclamation);
+                MessageBox.Show("O limite máximo de opções marcadas para esta pergunta é de " + novaResposta.getMaxPerm() + ".\nPor favor, desmarque alternativas excedentes.", "Limite de Opções", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
         private void btn_voltar_Click(object sender, EventArgs e)
@@ -636,7 +636,7 @@ namespace SurveyDataEntry
             }
             else
             {
-                MessageBox.Show("Conecte-se a Fonte do Banco de Dados, para Conseguir Registrar esses dados!");
+                MessageBox.Show("Não foi possível conectar ao banco de dados local. Verifique o arquivo da base de dados.", "Falha de Conexão", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
         }

@@ -1,4 +1,4 @@
-namespace SurveyDataEntry
+﻿namespace SurveyDataEntry
 {
     partial class frm_responder_pesquisa
     {
@@ -80,7 +80,7 @@ namespace SurveyDataEntry
             this.lbl_maxPerm.Name = "lbl_maxPerm";
             this.lbl_maxPerm.Size = new System.Drawing.Size(142, 17);
             this.lbl_maxPerm.TabIndex = 17;
-            this.lbl_maxPerm.Text = "(Assinale até x opções)";
+            this.lbl_maxPerm.Text = "(Assinale no máximo: x)";
             // 
             // lbl_pergunta
             // 

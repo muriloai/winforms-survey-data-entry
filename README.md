@@ -14,6 +14,12 @@ A arquitetura utiliza o banco de dados embutido **SQLite**, eliminando a necessi
 
 A camada de persistência opera com comandos SQL parametrizados e controle transacional atômico (ACID), garantindo total integridade dos dados durante a aplicação e envio de questionários. A interface do sistema adota identidade visual limpa e profissional, sem ilustrações ou figuras de personagens, com logotipo moderno disponibilizado nos formatos PNG e WebP.
 
+### Memória Técnica e Evolução do Projeto
+
+Para conhecer a história completa do desenvolvimento deste software desde a sua concepção em 2014, os desafios da arquitetura original em MySQL, a reconstituição do banco de dados relacional, os prints comparativos da interface legada e os detalhes da jornada de modernização e rebranding, consulte o documento dedicado:
+
+-> **[História e Evolução do Projeto (HISTORIA.md)](HISTORIA.md)**
+
 ---
 
 ## 2. Principais Funcionalidades
@@ -207,6 +213,7 @@ As imagens geradas são salvas na pasta `docs/screenshots/`.
 .
 |-- .gitignore                  # Regras de exclusao do Git (artefatos, binarios e bases *.db)
 |-- README.md                   # Documentacao tecnica do projeto com prints de tela
+|-- HISTORIA.md                 # Memoria tecnica, origens de 2014, prints legados e evolucao
 |-- plano.md                    # Planejamento e registro de execucao de todas as fases
 |-- database/                   # Scripts SQL para SQLite
 |   |-- 01_schema.sql           # DDL: definicao de tabelas, chaves e constraints
@@ -215,7 +222,9 @@ As imagens geradas são salvas na pasta `docs/screenshots/`.
 |-- docs/                       # Documentacao visual e capturas de tela
 |   |-- logo_survey.png         # Logotipo clean corporativo (PNG com transparencia)
 |   |-- logo_survey.webp        # Logotipo clean corporativo (formato WebP)
-|   `-- screenshots/            # Imagens demonstrativas das interfaces do sistema
+|   |-- icons/                  # Iconografia oficial vetorial do sistema (sucesso, aviso, erro, info)
+|   |-- legacy/                 # Registros visuais legados de 2014 (mascote, botoes e logotipo antigo)
+|   `-- screenshots/            # Imagens demonstrativas das interfaces atuais do sistema
 |-- scripts/                    # Scripts utilitarios e automacao
 |   `-- capture_screenshots.ps1 # Automacao para captura off-screen dos formularios
 `-- src/                        # Codigo-fonte da aplicacao
@@ -263,3 +272,10 @@ As imagens geradas são salvas na pasta `docs/screenshots/`.
 ```
 
 ---
+
+## 10. Histórico e Memória Técnica
+
+O projeto possui documentação aprofundada sobre a sua trajetória histórica, abordando a arquitetura original de 2014 desenvolvida em WinForms + MySQL, os desafios da modelagem de dados sem scripts versionados, as telas legadas com mascote e degradês de bitmap, e o processo completo de modernização que culminou no suporte a SQLite embutido, transações ACID, padronização de codificação UTF-8 e novo design corporativo minimalista com iconologia gráfica dedicada.
+
+Para conferir a evolução visual e os prints do sistema original, acesse:
+-> **[História e Evolução do Projeto (HISTORIA.md)](HISTORIA.md)**

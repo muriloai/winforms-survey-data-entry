@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -134,14 +134,14 @@ namespace SurveyDataEntry
             try
             {
                 id = Convert.ToInt32(cbx_resultado.SelectedValue);
-                MessageBox.Show((cbx_resultado.SelectedValue + "").ToString());
+                // selecao identificada
             }catch
             {}*/
         }
 
         private void btn_selecionar_Click(object sender, EventArgs e)
         {
-            if(MessageBox.Show(null, "Deseja Realmente Selecionar: \n"+(cbx_resultado.Text)+"\n?", "ATENÇÃO!", MessageBoxButtons.YesNo, MessageBoxIcon.Information)==DialogResult.Yes)
+            if(MessageBox.Show(null, "Deseja realmente confirmar a seleção abaixo?\n\n" + cbx_resultado.Text, "Confirmação de Seleção", MessageBoxButtons.YesNo, MessageBoxIcon.Question)==DialogResult.Yes)
             {
                 switch (tipo)
                 {

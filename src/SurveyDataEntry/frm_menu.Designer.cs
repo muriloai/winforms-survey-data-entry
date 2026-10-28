@@ -1,4 +1,4 @@
-namespace SurveyDataEntry
+﻿namespace SurveyDataEntry
 {
     partial class frm_menu
     {
@@ -171,7 +171,7 @@ namespace SurveyDataEntry
             this.lbl_coleta_desc.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(116)))), ((int)(((byte)(139)))));
             this.lbl_coleta_desc.Location = new System.Drawing.Point(15, 38);
             this.lbl_coleta_desc.Name = "lbl_coleta_desc";
-            this.lbl_coleta_desc.Size = new System.Drawing.Size(430, 24);
+            this.lbl_coleta_desc.Size = new System.Drawing.Size(430, 28);
             this.lbl_coleta_desc.TabIndex = 1;
             this.lbl_coleta_desc.Text = "Selecione o formulário e posto ativo com suporte a navegação por teclado.";
             // 
@@ -499,6 +499,7 @@ namespace SurveyDataEntry
             this.lbl_step1_title.Name = "lbl_step1_title";
             this.lbl_step1_title.Size = new System.Drawing.Size(182, 20);
             this.lbl_step1_title.TabIndex = 1;
+            this.lbl_step1_title.UseMnemonic = false;
             this.lbl_step1_title.Text = "Estruturação & Cadastros";
             // 
             // lbl_step1_desc
@@ -599,6 +600,7 @@ namespace SurveyDataEntry
             this.lbl_step3_title.Name = "lbl_step3_title";
             this.lbl_step3_title.Size = new System.Drawing.Size(182, 20);
             this.lbl_step3_title.TabIndex = 1;
+            this.lbl_step3_title.UseMnemonic = false;
             this.lbl_step3_title.Text = "Tabulação & Consolidação";
             // 
             // lbl_step3_desc
@@ -657,8 +659,7 @@ namespace SurveyDataEntry
             this.lbl_footer.Name = "lbl_footer";
             this.lbl_footer.Size = new System.Drawing.Size(655, 15);
             this.lbl_footer.TabIndex = 0;
-            this.lbl_footer.Text = "Pronto | Atalhos: [Duplo clique no cadeado] Acesso Restrito | [ESC] Fechar Painé" +
-    "is | [Duplo clique no Logo] Relatório de Balanço";
+            this.lbl_footer.Text = "Pronto | Atalhos: Duplo clique no cadeado para Acesso Restrito  •  Tecla ESC para Fechar Painéis  •  Duplo clique no Logotipo para Relatório de Balanço";
             // 
             // pnl_resultado_balanco
             // 

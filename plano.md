@@ -24,7 +24,7 @@ O objetivo foi trazer esse sistema para a raiz do repositório de forma limpa e 
 - `README.md` redigido com padrão técnico corporativo, sem emojis e sem referências a marcas comerciais do software legado.
 
 ### Fase 4 -- Melhorias Arquiteturais Implementadas
-1. **Namespace Unificado**: Atualização completa de `dataChico_tabulador_pesquisas` para `SurveyDataEntry`.
+1. **Namespace Unificado**: Atualização completa do namespace legado para `SurveyDataEntry`.
 2. **Externalização da String de Conexão**: Suporte nativo a `connectionStrings` e `userSettings` no `app.config`, com persistência via `Properties.Settings.Default.Save()`.
 3. **Prevenção de Vazamento de Conexão e Leitores**: Uso de blocos `using (SQLiteCommand ...)` e `using (SQLiteDataReader ...)`.
 4. **Eliminação de Execuções Redundantes**: Removido o `ExecuteNonQuery()` desnecessário antes de `ExecuteReader()`.
@@ -78,10 +78,40 @@ O objetivo foi trazer esse sistema para a raiz do repositório de forma limpa e 
 5. **Atualização Completa dos Screenshots**:
    - Reexecução do script `scripts/capture_screenshots.ps1` atualizando todos os 10 prints demonstrativos em `docs/screenshots/`.
 
+### Fase 8 -- Documentação Histórica e Memória Técnica do Software
+1. **Criação de `HISTORIA.md`**:
+   - Registro detalhado das origens do sistema em 2014, o modelo de desenvolvimento inicial em WinForms e a dependência original do MySQL.
+   - Documentação dos desafios técnicos da época (scripts DDL não versionados e perdidos com o tempo, consultas concatenadas e acoplamento a servidores externos).
+   - Detalhamento do processo de modernização e rebranding (reconstituição do schema, transição para SQLite embutido com auto-inicialização e transações ACID, e reconstrução visual com Segoe UI e logotipo minimalista).
+2. **Preservação de Ativos e Capturas Legadas (`docs/legacy/`)**:
+   - Resgate dos prints históricos via histórico do Git para `docs/legacy/01_menu_legado_mascote.png` e `docs/legacy/02_menu_gestao_legado.png`.
+   - Preservação da textura original de botão dos anos 2010 (`docs/legacy/btn_01_legado.png`) e da identidade anterior (`docs/legacy/logo_legado.png`).
+   - Tabelas comparativas lado a lado evidenciando as transformações de layout e arquitetura.
+3. **Encadeamento Bidirecional de Documentação**:
+   - Vinculação cruzada entre `README.md` e `HISTORIA.md`.
+
+### Fase 9 -- Iconologia Gráfica Oficial e Correção de Encoding
+1. **Expurgo de Pseudo-Ícones Textuais**:
+   - Eliminação de textos simulando ícones como `[OK]`, `[WARNING]`, `[ERRO]`, `[INFO]`, `[ESC]` nos formulários e diálogos.
+   - Substituição do `[OK]` da tela de conclusão por controle `PictureBox` dedicado.
+2. **Criação da Família de Ícones Vetoriais Antialiased (`docs/icons/` e `Resources/`)**:
+   - `ic_success.png`: Círculo verde esmeralda com símbolo de verificação (checkmark).
+   - `ic_warning.png`: Círculo âmbar/laranja com símbolo de exclamação.
+   - `ic_error.png`: Círculo vermelho carmim com símbolo de cancelamento (X).
+   - `ic_info.png`: Círculo azul celeste com símbolo de informação (i).
+3. **Padronização de Codificação UTF-8 e Eliminação de Mojibake**:
+   - Configuração de `<CodePage>65001</CodePage>` no arquivo de projeto `SurveyDataEntry.csproj`.
+   - Normalização de todos os arquivos de código (`.cs`), scripts (`.ps1`) e esquemas (`.sql`) com codificação UTF-8 e assinatura BOM única.
+   - Correção de acentuação gráfica em todos os formulários, caixas de diálogo e script de captura de tela.
+4. **Atualização Completa das Capturas de Tela**:
+   - Reexecução do script automatizado de captura gerando os 10 prints demonstrativos com fidelidade visual absoluta e sem anomalias de texto.
+
 ---
 
 ## 3. Status de Validação
 
 - Compilação limpa no MSBuild para configurações `Debug` e `Release` com 0 erros e 0 avisos.
 - Verificação funcional com teste de integração automatizado cobrindo criação de base, inserções relacionais, transações atômicas e consultas em cascata.
-- Geração completa e automatizada dos 10 prints demonstrativos em `docs/screenshots/` refletindo a nova identidade visual clean.
+- Geração completa e automatizada dos 10 prints demonstrativos em `docs/screenshots/` refletindo a nova identidade visual clean e iconologia gráfica oficial.
+- Documentação histórica completa em `HISTORIA.md` integrada e apontada no `README.md` principal.
+- Eliminação total de pseudo-ícones textuais e correções completas de codificação UTF-8 nas telas e capturas.
