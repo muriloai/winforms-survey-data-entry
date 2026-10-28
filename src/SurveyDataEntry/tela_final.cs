@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -26,7 +26,7 @@ namespace SurveyDataEntry
         {
             if (frm != null && frm.get_qtdIDS_pergunta() > 0) //se tiver pergunta pra ser respondida!
             {
-                if (MessageBox.Show(null, "Deseja Responder Mais Uma em Seguida?", "MAIS UMA RODADA?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                if (MessageBox.Show(null, "Deseja responder mais um questionário para este formulário?", "Nova Coleta", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
                     this.Close();
                 }
@@ -38,7 +38,7 @@ namespace SurveyDataEntry
             }
             else
             {
-                if (MessageBox.Show(null, "Cadatre Perguntas ao Formulário para Prossiguir!","ATENÇÃO!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation) == DialogResult.OK)
+                if (MessageBox.Show(null, "Cadastre perguntas no formulário para prosseguir.", "Validação", MessageBoxButtons.OK, MessageBoxIcon.Information) == DialogResult.OK)
                 {
                     this.frm.Enabled = false;
                     this.frm.Close();

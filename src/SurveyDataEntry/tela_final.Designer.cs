@@ -1,4 +1,4 @@
-namespace SurveyDataEntry
+﻿namespace SurveyDataEntry
 {
     partial class tela_final
     {
@@ -29,7 +29,7 @@ namespace SurveyDataEntry
         private void InitializeComponent()
         {
             this.pnl_card = new System.Windows.Forms.Panel();
-            this.lbl_sucesso_icon = new System.Windows.Forms.Label();
+            this.pic_sucesso = new System.Windows.Forms.PictureBox();
             this.lbl_titulo = new System.Windows.Forms.Label();
             this.lbl_mensagem = new System.Windows.Forms.Label();
             this.btn_deNovoPesquisa = new System.Windows.Forms.Button();
@@ -42,7 +42,7 @@ namespace SurveyDataEntry
             this.pnl_card.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.pnl_card.BackColor = System.Drawing.Color.White;
             this.pnl_card.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pnl_card.Controls.Add(this.lbl_sucesso_icon);
+            this.pnl_card.Controls.Add(this.pic_sucesso);
             this.pnl_card.Controls.Add(this.lbl_titulo);
             this.pnl_card.Controls.Add(this.lbl_mensagem);
             this.pnl_card.Controls.Add(this.btn_deNovoPesquisa);
@@ -53,16 +53,15 @@ namespace SurveyDataEntry
             this.pnl_card.Size = new System.Drawing.Size(660, 420);
             this.pnl_card.TabIndex = 0;
             // 
-            // lbl_sucesso_icon
+            // pic_sucesso
             // 
-            this.lbl_sucesso_icon.Font = new System.Drawing.Font("Segoe UI", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_sucesso_icon.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(163)))), ((int)(((byte)(74)))));
-            this.lbl_sucesso_icon.Location = new System.Drawing.Point(36, 25);
-            this.lbl_sucesso_icon.Name = "lbl_sucesso_icon";
-            this.lbl_sucesso_icon.Size = new System.Drawing.Size(588, 65);
-            this.lbl_sucesso_icon.TabIndex = 4;
-            this.lbl_sucesso_icon.Text = "[OK]";
-            this.lbl_sucesso_icon.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.pic_sucesso.Image = global::SurveyDataEntry.Properties.Resources.ic_success;
+            this.pic_sucesso.Location = new System.Drawing.Point(298, 24);
+            this.pic_sucesso.Name = "pic_sucesso";
+            this.pic_sucesso.Size = new System.Drawing.Size(64, 64);
+            this.pic_sucesso.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pic_sucesso.TabIndex = 4;
+            this.pic_sucesso.TabStop = false;
             // 
             // lbl_titulo
             // 
@@ -143,7 +142,7 @@ namespace SurveyDataEntry
         #endregion
 
         private System.Windows.Forms.Panel pnl_card;
-        private System.Windows.Forms.Label lbl_sucesso_icon;
+        private System.Windows.Forms.PictureBox pic_sucesso;
         private System.Windows.Forms.Label lbl_titulo;
         private System.Windows.Forms.Label lbl_mensagem;
         private System.Windows.Forms.Button btn_voltar;

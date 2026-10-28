@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
@@ -151,7 +151,7 @@ namespace SurveyDataEntry
             {
                 if (!ConexaoBD.Silencioso)
                 {
-                    MessageBox.Show(null,"Impossivel obter dados de autocompletar, verifique a conexão com o banco de dados!","Atenção!",MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    MessageBox.Show(null, "Não foi possível obter dados de autocompletar. Verifique a conexão com o banco de dados local.", "Aviso de Conexão", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
             }
         }
