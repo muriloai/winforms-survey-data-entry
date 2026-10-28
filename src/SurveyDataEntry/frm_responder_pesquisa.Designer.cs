@@ -163,7 +163,7 @@
             this.btn_voltar.Size = new System.Drawing.Size(140, 40);
             this.btn_voltar.TabIndex = 0;
             this.btn_voltar.TabStop = false;
-            this.btn_voltar.Text = "<< Voltar";
+            this.btn_voltar.Text = "«  Voltar";
             this.btn_voltar.UseVisualStyleBackColor = false;
             this.btn_voltar.Click += new System.EventHandler(this.btn_voltar_Click);
             // 
@@ -181,7 +181,7 @@
             this.btn_responder.Size = new System.Drawing.Size(196, 42);
             this.btn_responder.TabIndex = 2;
             this.btn_responder.TabStop = false;
-            this.btn_responder.Text = "Responder >>";
+            this.btn_responder.Text = "Avançar  »";
             this.btn_responder.UseVisualStyleBackColor = false;
             this.btn_responder.Click += new System.EventHandler(this.btn_responder_Click);
             // 

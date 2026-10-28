@@ -189,7 +189,7 @@
             this.btn_responder_pesquisa.Name = "btn_responder_pesquisa";
             this.btn_responder_pesquisa.Size = new System.Drawing.Size(425, 52);
             this.btn_responder_pesquisa.TabIndex = 2;
-            this.btn_responder_pesquisa.Text = "▶  INICIAR COLETA DE PESQUISA";
+            this.btn_responder_pesquisa.Text = "▶  Iniciar Coleta de Pesquisa";
             this.btn_responder_pesquisa.UseVisualStyleBackColor = false;
             this.btn_responder_pesquisa.Click += new System.EventHandler(this.btn_responder_pesquisa_Click);
             // 
@@ -385,7 +385,7 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(125, 15);
             this.label1.TabIndex = 0;
-            this.label1.Text = "Arquivo do Banco DB:";
+            this.label1.Text = "Arquivo do Banco (SQLite):";
             // 
             // txt_localDB
             // 
@@ -403,7 +403,7 @@
             this.chk_localDB.Name = "chk_localDB";
             this.chk_localDB.Size = new System.Drawing.Size(59, 17);
             this.chk_localDB.TabIndex = 2;
-            this.chk_localDB.Text = "É local";
+            this.chk_localDB.Text = "Arquivo Local";
             this.chk_localDB.UseVisualStyleBackColor = true;
             this.chk_localDB.CheckedChanged += new System.EventHandler(this.chk_localDB_CheckedChanged);
             // 
@@ -419,7 +419,7 @@
             this.btn_aplicarLocalDB.Name = "btn_aplicarLocalDB";
             this.btn_aplicarLocalDB.Size = new System.Drawing.Size(160, 36);
             this.btn_aplicarLocalDB.TabIndex = 3;
-            this.btn_aplicarLocalDB.Text = "Aplicar!";
+            this.btn_aplicarLocalDB.Text = "Salvar Base";
             this.btn_aplicarLocalDB.UseVisualStyleBackColor = false;
             this.btn_aplicarLocalDB.Click += new System.EventHandler(this.btn_aplicarLocalDB_Click);
             // 
