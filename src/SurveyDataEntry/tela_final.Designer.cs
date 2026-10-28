@@ -50,13 +50,13 @@
             this.pnl_card.Location = new System.Drawing.Point(260, 110);
             this.pnl_card.Name = "pnl_card";
             this.pnl_card.Padding = new System.Windows.Forms.Padding(36);
-            this.pnl_card.Size = new System.Drawing.Size(660, 420);
+            this.pnl_card.Size = new System.Drawing.Size(660, 400);
             this.pnl_card.TabIndex = 0;
             // 
             // pic_sucesso
             // 
             this.pic_sucesso.Image = global::SurveyDataEntry.Properties.Resources.ic_success;
-            this.pic_sucesso.Location = new System.Drawing.Point(298, 24);
+            this.pic_sucesso.Location = new System.Drawing.Point(298, 28);
             this.pic_sucesso.Name = "pic_sucesso";
             this.pic_sucesso.Size = new System.Drawing.Size(64, 64);
             this.pic_sucesso.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -67,7 +67,7 @@
             // 
             this.lbl_titulo.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbl_titulo.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(23)))), ((int)(((byte)(42)))));
-            this.lbl_titulo.Location = new System.Drawing.Point(36, 100);
+            this.lbl_titulo.Location = new System.Drawing.Point(36, 104);
             this.lbl_titulo.Name = "lbl_titulo";
             this.lbl_titulo.Size = new System.Drawing.Size(588, 38);
             this.lbl_titulo.TabIndex = 0;
@@ -78,7 +78,7 @@
             // 
             this.lbl_mensagem.Font = new System.Drawing.Font("Segoe UI", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbl_mensagem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(116)))), ((int)(((byte)(139)))));
-            this.lbl_mensagem.Location = new System.Drawing.Point(36, 148);
+            this.lbl_mensagem.Location = new System.Drawing.Point(36, 150);
             this.lbl_mensagem.Name = "lbl_mensagem";
             this.lbl_mensagem.Size = new System.Drawing.Size(588, 45);
             this.lbl_mensagem.TabIndex = 1;
@@ -93,7 +93,7 @@
             this.btn_deNovoPesquisa.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_deNovoPesquisa.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_deNovoPesquisa.ForeColor = System.Drawing.Color.White;
-            this.btn_deNovoPesquisa.Location = new System.Drawing.Point(140, 225);
+            this.btn_deNovoPesquisa.Location = new System.Drawing.Point(140, 218);
             this.btn_deNovoPesquisa.Name = "btn_deNovoPesquisa";
             this.btn_deNovoPesquisa.Size = new System.Drawing.Size(380, 48);
             this.btn_deNovoPesquisa.TabIndex = 2;
@@ -109,7 +109,7 @@
             this.btn_voltar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_voltar.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_voltar.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(85)))), ((int)(((byte)(105)))));
-            this.btn_voltar.Location = new System.Drawing.Point(140, 290);
+            this.btn_voltar.Location = new System.Drawing.Point(140, 276);
             this.btn_voltar.Name = "btn_voltar";
             this.btn_voltar.Size = new System.Drawing.Size(380, 42);
             this.btn_voltar.TabIndex = 3;
